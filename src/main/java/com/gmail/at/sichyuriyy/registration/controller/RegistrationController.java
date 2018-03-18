@@ -1,12 +1,15 @@
 package com.gmail.at.sichyuriyy.registration.controller;
 
 import com.gmail.at.sichyuriyy.registration.service.RegistrationService;
+import com.gmail.at.sichyuriyy.registration.service.UserAlreadyExistException;
 import com.gmail.at.sichyuriyy.user.dto.UserDto;
 import com.gmail.at.sichyuriyy.user.dto.UserTransformer;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.gmail.at.sichyuriyy.validation.FieldErrorDto;
+import com.gmail.at.sichyuriyy.validation.ValidationErrorDto;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/users/registration")
@@ -21,7 +24,17 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public void registration(@RequestBody UserDto userDto) {
+    public void registration(@Valid @RequestBody UserDto userDto) {
         registrationService.register(userTransformer.fromDto(userDto));
+    }
+
+    @ExceptionHandler(UserAlreadyExistException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ValidationErrorDto userAlreadyExist(UserAlreadyExistException ex) {
+        return new ValidationErrorDto(FieldErrorDto.builder()
+                .fieldName("username")
+                .errorCode("user.username.alreadyExist")
+                .defaultMessage(ex.getMessage())
+                .build());
     }
 }

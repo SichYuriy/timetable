@@ -1,8 +1,7 @@
 package com.gmail.at.sichyuriyy.registration.service;
 
-class UserAlreadyExistException extends IllegalArgumentException {
-
-    UserAlreadyExistException(String message) {
+public class UserAlreadyExistException extends IllegalArgumentException {
+    public UserAlreadyExistException(String message) {
         super(message);
     }
 }

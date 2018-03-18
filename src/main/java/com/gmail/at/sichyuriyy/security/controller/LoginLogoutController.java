@@ -27,7 +27,7 @@ public class LoginLogoutController {
     }
 
     @PostMapping(path = "/login", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void login(@RequestBody LoginUserDto loginUserDto) {
+    public void login(@RequestBody UserDto loginUserDto) {
         securityService.login(loginUserDto.getUsername(), loginUserDto.getPassword());
     }
 
