@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @Configuration
 @EnableJpaRepositories("com.gmail.at.sichyuriyy.*")
 @EntityScan("com.gmail.at.sichyuriyy.*")
-@PropertySource("persistence.properties")
+@PropertySource("classpath:persistence.properties")
 public class JpaConfiguration {
 }

@@ -1,7 +1,6 @@
 package com.gmail.at.sichyuriyy.user.repository;
 
 import com.gmail.at.sichyuriyy.app.Application;
-import com.gmail.at.sichyuriyy.app.JpaConfiguration;
 import com.gmail.at.sichyuriyy.user.domain.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,18 +21,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class UserRepositoryTest {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository subject;
 
     @Test
     public void findByUserName_returnCorrectUser() {
         User user1 = User.builder().username("user1").password("pass1").build();
         User user2 = User.builder().username("user2").password("pass2").build();
 
-        userRepository.save(user1);
-        userRepository.save(user2);
+        subject.save(user1);
+        subject.save(user2);
 
-        assertThat(userRepository.findByUsername("non_existing_username")).isEmpty();
-        assertThat(userRepository.findByUsername("user1")).containsSame(user1);
-        assertThat(userRepository.findByUsername("user2")).containsSame(user2);
+        assertThat(subject.findByUsername("non_existing_username")).isEmpty();
+        assertThat(subject.findByUsername("user1")).containsSame(user1);
+        assertThat(subject.findByUsername("user2")).containsSame(user2);
     }
 }
