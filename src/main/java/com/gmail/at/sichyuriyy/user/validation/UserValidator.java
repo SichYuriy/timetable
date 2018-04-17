@@ -20,5 +20,6 @@ public class UserValidator implements Validator {
                 "user.username.required", "username can't be empty");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password",
                 "user.password.required", "password can't be empty");
+
     }
 }
