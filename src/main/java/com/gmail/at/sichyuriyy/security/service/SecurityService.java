@@ -11,7 +11,7 @@ public interface SecurityService {
 
     Optional<User> findLoggedInUser();
 
-    void login(String username, String password) throws UsernameNotFoundException;
+    void login(HttpServletRequest httpServletRequest, String username, String password) throws UsernameNotFoundException;
 
     void logout(HttpServletRequest request, HttpServletResponse response);
 }

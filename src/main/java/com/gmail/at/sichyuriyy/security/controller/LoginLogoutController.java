@@ -5,7 +5,6 @@ import com.gmail.at.sichyuriyy.user.dto.UserDto;
 import com.gmail.at.sichyuriyy.user.dto.UserTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,9 +25,9 @@ public class LoginLogoutController {
         this.userTransformer = userTransformer;
     }
 
-    @PostMapping(path = "/login", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void login(@RequestBody UserDto loginUserDto) {
-        securityService.login(loginUserDto.getUsername(), loginUserDto.getPassword());
+    //    @PostMapping(path = "/login")
+    public void login(@RequestBody UserDto loginUserDto, HttpServletRequest request) {
+        securityService.login(request, loginUserDto.getUsername(), loginUserDto.getPassword());
     }
 
     @PostMapping("/logout")

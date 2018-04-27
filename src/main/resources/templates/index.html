@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="timetableApp">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="timetableApp.js"></script>
 <body>
+<div ng-view></div>
 
+<form action="logout" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
 </body>
 </html>

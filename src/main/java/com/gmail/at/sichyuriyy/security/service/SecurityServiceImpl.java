@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,6 +17,8 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
+
+import static org.springframework.security.web.context.HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY;
 
 @Service
 public class SecurityServiceImpl implements SecurityService {
@@ -35,20 +38,24 @@ public class SecurityServiceImpl implements SecurityService {
 
     @Override
     public Optional<User> findLoggedInUser() {
-        Object userDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
-        if (userDetails instanceof UserDetails) {
-            return userService.findByUserName(((UserDetails)userDetails).getUsername());
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (name != null) {
+            return userService.findByUserName(name);
         }
         return Optional.empty();
     }
 
     @Override
-    public void login(String username, String password) throws UsernameNotFoundException {
+    public void login(HttpServletRequest req, String username, String password) throws UsernameNotFoundException {
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
                 new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
 
-        authenticationManager.authenticate(usernamePasswordAuthenticationToken);
+        Authentication auth = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
+        SecurityContext sc = SecurityContextHolder.getContext();
+        sc.setAuthentication(auth);
+
+        req.getSession(true).setAttribute(SPRING_SECURITY_CONTEXT_KEY, sc);
     }
 
     @Override

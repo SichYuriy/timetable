@@ -5,6 +5,8 @@ import com.gmail.at.sichyuriyy.user.domain.User;
 import com.gmail.at.sichyuriyy.user.dto.UserTransformer;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.test.web.servlet.MockMvc;
@@ -17,17 +19,19 @@ import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class LoginLogoutControllerTest {
 
+    @Mock
     private SecurityService securityService;
+    @Mock
+    private HttpServletRequest httpServletRequest;
     private MockMvc mvc;
 
     @Before
     public void setUp() {
-        securityService = mock(SecurityService.class);
+        MockitoAnnotations.initMocks(this);
         LoginLogoutController controller =
                 new LoginLogoutController(securityService, new UserTransformer());
         this.mvc = MockMvcBuilders.standaloneSetup(controller).build();
@@ -61,7 +65,7 @@ public class LoginLogoutControllerTest {
 
     @Test
     public void login_whenCredentialsAreWrong_shouldResponse400() throws Exception {
-        doThrow(UsernameNotFoundException.class).when(securityService).login(anyString(), anyString());
+        doThrow(UsernameNotFoundException.class).when(securityService).login(any(HttpServletRequest.class), anyString(), anyString());
         mvc.perform(
                 MockMvcRequestBuilders.post("/session/login")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -69,7 +73,7 @@ public class LoginLogoutControllerTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(content().string(""));
 
-        verify(securityService).login("John_Snow", "123");
+        verify(securityService).login(httpServletRequest, "John_Snow", "123");
     }
 
     @Test
@@ -81,7 +85,7 @@ public class LoginLogoutControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string(""));
 
-        verify(securityService).login("John_Snow", "123");
+        verify(securityService).login(httpServletRequest, "John_Snow", "123");
     }
 
     @Test
