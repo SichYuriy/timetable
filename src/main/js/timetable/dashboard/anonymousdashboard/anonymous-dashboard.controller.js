@@ -1,5 +1,6 @@
-angular.module('dashboard').controller('anonymousDashboardController', AnonymousDashboardController);
+(function () {
+    angular.module('dashboard').controller('anonymousDashboardController', AnonymousDashboardController);
 
-function AnonymousDashboardController() {
-
-}
+    function AnonymousDashboardController() {
+    }
+})();

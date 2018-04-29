@@ -1,4 +1,6 @@
-angular.module('dashboard').component('anonymousDashboard', {
-    templateUrl: 'dashboard/anonymousdashboard/anonymous-dashboard.html',
-    controller: 'anonymousDashboardController'
-});
+(function () {
+    angular.module('dashboard').component('anonymousDashboard', {
+        templateUrl: 'dashboard/anonymousdashboard/anonymous-dashboard.html',
+        controller: 'anonymousDashboardController'
+    });
+})();
