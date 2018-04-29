@@ -7,6 +7,9 @@ function RegistrationFormController($scope, authenticationService) {
     $scope.password = '';
     $scope.repeatPassword = '';
 
+    $scope.registrationSucceed = false;
+    $scope.userIsAlreadyExists = false;
+
     $scope.submitRegistration = submitRegistration;
 
     function submitRegistration() {
@@ -14,16 +17,30 @@ function RegistrationFormController($scope, authenticationService) {
             alert('Different passwords');
             return;
         }
+        clearPreviousSubmitResults();
         authenticationService.register(getInputUser())
-            .then(successRegister, failedRegister);
+            .then(clearForm)
+            .then(showRegistrationSucceed)
+            .catch(showUserIsAlreadyExists);
     }
 
-    function successRegister() {
-        console.log('successRegister');
+    function clearPreviousSubmitResults() {
+        $scope.registrationSucceed = false;
+        $scope.userIsAlreadyExists = false;
     }
 
-    function failedRegister() {
-        console.log('failedRegistration');
+    function clearForm() {
+        $scope.username = '';
+        $scope.repeatPassword = '';
+        $scope.password = '';
+    }
+
+    function showRegistrationSucceed()   {
+        $scope.registrationSucceed = true;
+    }
+
+    function showUserIsAlreadyExists() {
+        $scope.userIsAlreadyExists = true;
     }
 
     function getInputUser() {

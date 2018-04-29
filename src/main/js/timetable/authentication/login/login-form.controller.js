@@ -1,11 +1,11 @@
-console.log('loginFormController');
 angular.module('authentication').controller('loginFormController',
     ['$scope', 'authenticationService', '$window', LoginFormController]);
 
 function LoginFormController($scope, authenticationService, $window) {
-    console.log('init login controller');
+
     $scope.username = '';
     $scope.password = '';
+    $scope.loginFailed = false;
 
     $scope.submitLogin = submitLogin;
 
@@ -14,17 +14,14 @@ function LoginFormController($scope, authenticationService, $window) {
             username: $scope.username,
             password: $scope.password
         };
-        authenticationService.login(user).then(loginSuccess, loginError);
+        authenticationService.login(user).then(redirectDashboard, showLoginFailed);
     }
 
-    function loginSuccess(response) {
-        console.log('login success');
-        console.log(response.data);
+    function redirectDashboard() {
         $window.location.href = '#!/dashboard'
     }
 
-    function loginError(response) {
-        console.log(response);
-        console.log('login failed. Wrong username or password')
+    function showLoginFailed() {
+        $scope.loginFailed = true;
     }
 }

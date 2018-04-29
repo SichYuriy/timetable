@@ -1,4 +1,6 @@
 Registration
+<span ng-if="registrationSucceed">Registration Succeed</span>
+<span ng-if="userIsAlreadyExists">Sorry! Username is already taken by another user.</span>
 <label>
     Username:
     <input name="username" ng-model="username"/>
