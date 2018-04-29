@@ -1,4 +1,4 @@
-describe('registrationFormController', function () {
+describe('RegistrationFormController', function () {
     beforeEach(module('timetableApp.authentication'));
 
     var $rootScope;
@@ -25,7 +25,7 @@ describe('registrationFormController', function () {
     });
 
     beforeEach(function () {
-        ctrl = $controller('registrationFormController', {
+        ctrl = $controller('RegistrationFormController', {
             $scope: $scope,
             authenticationService: authenticationService
         });

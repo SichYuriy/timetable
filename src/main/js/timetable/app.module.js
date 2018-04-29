@@ -12,7 +12,7 @@
                 template: '<login-form></login-form>'
             }).when('/dashboard', {
                 template: '',
-                controller: 'loadDashboardController'
+                controller: 'LoadDashboardController'
             }).when('/userDashboard', {
                 template: '<user-dashboard></user-dashboard>'
             }).when('/anonymousDashboard', {

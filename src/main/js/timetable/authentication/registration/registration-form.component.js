@@ -1,6 +1,6 @@
 (function () {
     angular.module('timetableApp.authentication').component('registrationForm', {
         templateUrl: 'authentication/registration/registration-form.html',
-        controller: 'registrationFormController'
+        controller: 'RegistrationFormController'
     });
 })();

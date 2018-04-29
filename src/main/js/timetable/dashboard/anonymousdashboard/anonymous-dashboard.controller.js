@@ -1,5 +1,5 @@
 (function () {
-    angular.module('timetableApp.dashboard').controller('anonymousDashboardController', AnonymousDashboardController);
+    angular.module('timetableApp.dashboard').controller('AnonymousDashboardController', AnonymousDashboardController);
 
     function AnonymousDashboardController() {
     }

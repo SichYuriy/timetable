@@ -1,5 +1,5 @@
 (function () {
-    angular.module('timetableApp.dashboard').controller('loadDashboardController',
+    angular.module('timetableApp.dashboard').controller('LoadDashboardController',
         ['$window', 'authenticationService', LoadDashboardController]);
 
     function LoadDashboardController($window, authenticationService) {
