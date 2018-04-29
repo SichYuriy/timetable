@@ -25,7 +25,7 @@ public class LoginLogoutController {
         this.userTransformer = userTransformer;
     }
 
-    //    @PostMapping(path = "/login")
+    @PostMapping(path = "/login")
     public void login(@RequestBody UserDto loginUserDto, HttpServletRequest request) {
         securityService.login(request, loginUserDto.getUsername(), loginUserDto.getPassword());
     }

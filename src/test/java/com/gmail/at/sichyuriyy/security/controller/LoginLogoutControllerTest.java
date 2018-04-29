@@ -25,8 +25,6 @@ public class LoginLogoutControllerTest {
 
     @Mock
     private SecurityService securityService;
-    @Mock
-    private HttpServletRequest httpServletRequest;
     private MockMvc mvc;
 
     @Before
@@ -73,7 +71,7 @@ public class LoginLogoutControllerTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(content().string(""));
 
-        verify(securityService).login(httpServletRequest, "John_Snow", "123");
+        verify(securityService).login(any(HttpServletRequest.class), eq("John_Snow"), eq("123"));
     }
 
     @Test
@@ -85,7 +83,7 @@ public class LoginLogoutControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string(""));
 
-        verify(securityService).login(httpServletRequest, "John_Snow", "123");
+        verify(securityService).login(any(HttpServletRequest.class), eq("John_Snow"), eq("123"));
     }
 
     @Test

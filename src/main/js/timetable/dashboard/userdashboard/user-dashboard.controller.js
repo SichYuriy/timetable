@@ -1,7 +1,9 @@
 angular.module('dashboard').controller('userDashboardController',
-    ['$scope', 'authenticationService', UserDashboardController]);
+    ['$scope', '$window', 'authenticationService', UserDashboardController]);
 
-function UserDashboardController($scope, authenticationService) {
+function UserDashboardController($scope, $window, authenticationService) {
+
+    $scope.logout = logout;
 
     authenticationService.getCurrentUser()
         .then(updateCurrentUser, showError);
@@ -12,5 +14,14 @@ function UserDashboardController($scope, authenticationService) {
 
     function showError() {
         console.log('fail to load current user');
+    }
+
+    function logout() {
+        authenticationService.logout().then(redirectDashboard);
+    }
+
+    function redirectDashboard() {
+        console.log('logout success');
+        $window.location.href = '#!/dashboard'
     }
 }

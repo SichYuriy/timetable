@@ -7,6 +7,6 @@ module.exports = {
     },
     output: {
         filename: 'timetableApp.js',
-        path: path.resolve(__dirname, 'target/classes/templates')
+        path: path.resolve(__dirname, 'target/classes/public')
     }
 };
