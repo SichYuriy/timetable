@@ -1,8 +1,8 @@
 (function () {
     'use strict';
-    angular.module('authentication', []);
-    angular.module('dashboard', ['authentication']);
-    angular.module('timetableApp', ['ngRoute', 'authentication', 'dashboard']);
+    angular.module('timetableApp.authentication', []);
+    angular.module('timetableApp.dashboard', ['timetableApp.authentication']);
+    angular.module('timetableApp', ['ngRoute', 'timetableApp.authentication', 'timetableApp.dashboard']);
 
     angular.module('timetableApp').config(['$locationProvider', '$routeProvider',
         function config($locationProvider, $routeProvider) {

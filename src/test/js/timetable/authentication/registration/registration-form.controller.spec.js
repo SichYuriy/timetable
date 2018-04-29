@@ -1,5 +1,5 @@
 describe('registrationFormController', function () {
-    beforeEach(module('authentication'));
+    beforeEach(module('timetableApp.authentication'));
 
     var $rootScope;
     var $controller;

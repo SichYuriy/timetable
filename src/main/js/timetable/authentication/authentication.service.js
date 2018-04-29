@@ -1,5 +1,5 @@
 (function () {
-    angular.module('authentication').factory('authenticationService',
+    angular.module('timetableApp.authentication').factory('authenticationService',
         ['authenticationRepository', function (authenticationRepository) {
             return new AuthenticationService(authenticationRepository);
         }]);

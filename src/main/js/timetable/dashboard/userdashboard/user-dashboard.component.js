@@ -1,5 +1,5 @@
 (function () {
-    angular.module('dashboard').component('userDashboard', {
+    angular.module('timetableApp.dashboard').component('userDashboard', {
         templateUrl: 'dashboard/userdashboard/user-dashboard.html',
         controller: 'userDashboardController'
     });

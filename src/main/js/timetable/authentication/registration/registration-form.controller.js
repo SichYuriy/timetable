@@ -1,5 +1,5 @@
 (function () {
-    angular.module('authentication').controller('registrationFormController',
+    angular.module('timetableApp.authentication').controller('registrationFormController',
         ['$scope', 'authenticationService', RegistrationFormController]);
 
     function RegistrationFormController($scope, authenticationService) {
