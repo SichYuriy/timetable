@@ -1,0 +1,23 @@
+<div class="header col-md-12">
+    <div class="content col-md-offset-2 col-md-8">
+        <div class="time pull-left">
+            <img src="pictures/clock_logo1.png" class="logo" />
+            <span>{{vm.currentTime | date:'hh:mm:ss'}}</span>
+            <img src="pictures/calendar_logo1.png" class="logo"/>
+            <span>{{vm.currentTime | date:'dd/MM/yyyy'}}</span>
+        </div>
+        <div class="settings pull-right" ng-if="vm.currentUser.username">
+            <div class="dropdown">
+                <a class="user-link dropdown-toggle" data-toggle="dropdown">{{vm.currentUser.username}}
+                    <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="" ng-click="vm.logout()">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="settings pull-right" ng-if="!vm.currentUser.username">
+            <a class="btn btn-default" href="#!/login">Sign in</a>
+            <a class="btn btn-success" href="#!/registration">Sign up</a>
+        </div>
+    </div>
+</div>

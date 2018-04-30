@@ -5,7 +5,6 @@
     function UserDashboardController($window, authenticationService) {
         var vm = this;
 
-        vm.logout = logout;
         vm.currentUser = {};
         vm.alerts = {};
 
@@ -22,14 +21,6 @@
 
         function showError() {
             vm.alerts.userLoadError = true;
-        }
-
-        function logout() {
-            authenticationService.logout().then(redirectDashboard);
-        }
-
-        function redirectDashboard() {
-            $window.location.href = '#!/dashboard'
         }
     }
 })();

@@ -1,19 +1,28 @@
-Registration
-<span ng-if="vm.alerts.registrationSucceed">Registration Succeed</span>
-<span ng-if="vm.alerts.userIsAlreadyExists">Sorry! Username is already taken by another user.</span>
-<label>
-    Username:
-    <input name="username" ng-model="vm.username"/>
-</label>
+<logo-header></logo-header>
 
-<label>
-    Password:
-    <input name="password" ng-model="vm.password"/>
-</label>
+<div class="col-md-3 col-md-offset-4 authentication-form box-shadow">
+    <h2>Registration</h2>
+    <hr>
+    <div ng-if="vm.alerts.registrationSucceed" class="alert alert-success">
+        <strong>Success!</strong> Registration completed.
+    </div>
+    <div ng-if="vm.alerts.userIsAlreadyExists" class="alert alert-danger">
+        <strong>Sorry!</strong>  Username is already taken by another user.
+    </div>
 
-<label>
-    Repeat Password:
-    <input name="password" ng-model="vm.repeatPassword"/>
-</label>
-
-<button ng-click="vm.submitRegistration()">Register</button>
+    <form>
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input class="form-control" id="username" ng-model="vm.username">
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" ng-model="vm.password">
+        </div>
+        <div class="form-group">
+            <label for="repeatPassword">Repeat Password:</label>
+            <input type="password" class="form-control" id="repeatPassword" ng-model="vm.repeatPassword">
+        </div>
+        <button ng-click="vm.submitRegistration()" class="btn btn-primary">Submit</button>
+    </form>
+</div>
