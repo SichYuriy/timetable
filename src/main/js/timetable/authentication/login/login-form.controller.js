@@ -1,20 +1,18 @@
 (function () {
     angular.module('timetableApp.authentication').controller('LoginFormController',
-        ['$scope', 'authenticationService', '$window', LoginFormController]);
+        ['authenticationService', '$window', LoginFormController]);
 
-    function LoginFormController($scope, authenticationService, $window) {
+    function LoginFormController(authenticationService, $window) {
+        var vm = this;
 
-        $scope.username = '';
-        $scope.password = '';
-        $scope.loginFailed = false;
+        vm.username = '';
+        vm.password = '';
+        vm.alerts = {};
 
-        $scope.submitLogin = submitLogin;
+        vm.submitLogin = submitLogin;
 
         function submitLogin() {
-            var user = {
-                username: $scope.username,
-                password: $scope.password
-            };
+            var user = getInputUser();
             authenticationService.login(user).then(redirectDashboard, showLoginFailed);
         }
 
@@ -23,7 +21,14 @@
         }
 
         function showLoginFailed() {
-            $scope.loginFailed = true;
+            vm.alerts.loginFailed = true;
+        }
+
+        function getInputUser() {
+            return {
+                username: vm.username,
+                password: vm.password
+            };
         }
     }
 })();

@@ -1,6 +1,7 @@
 (function () {
     angular.module('timetableApp.dashboard').component('userDashboard', {
         templateUrl: 'dashboard/userdashboard/user-dashboard.html',
-        controller: 'UserDashboardController'
+        controller: 'UserDashboardController',
+        controllerAs: 'vm'
     });
 })();

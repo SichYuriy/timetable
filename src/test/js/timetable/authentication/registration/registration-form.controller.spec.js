@@ -9,7 +9,7 @@ describe('RegistrationFormController', function () {
 
     var $scope;
     var authenticationService;
-    var ctrl;
+    var subject;
 
     beforeEach(inject(function (_$rootScope_, _$controller_, _$q_) {
         $rootScope = _$rootScope_;
@@ -25,7 +25,7 @@ describe('RegistrationFormController', function () {
     });
 
     beforeEach(function () {
-        ctrl = $controller('RegistrationFormController', {
+        subject = $controller('RegistrationFormController', {
             $scope: $scope,
             authenticationService: authenticationService
         });
@@ -33,9 +33,9 @@ describe('RegistrationFormController', function () {
 
     describe('initialization', function () {
         it('should init registration form', function () {
-            expect($scope.username).toEqual('');
-            expect($scope.password).toEqual('');
-            expect($scope.repeatPassword).toEqual('');
+            expect(subject.username).toEqual('');
+            expect(subject.password).toEqual('');
+            expect(subject.repeatPassword).toEqual('');
         });
 
         it('should init registrationSucceed', function () {
@@ -45,11 +45,11 @@ describe('RegistrationFormController', function () {
 
     describe('submit registration', function () {
         beforeEach(function () {
-            $scope.username = "John_Snow";
-            $scope.password = "123";
-            $scope.repeatPassword = "123";
+            subject.username = "John_Snow";
+            subject.password = "123";
+            subject.repeatPassword = "123";
 
-            $scope.submitRegistration();
+            subject.submitRegistration();
         });
 
         it('should call authentication service', function () {
@@ -66,13 +66,13 @@ describe('RegistrationFormController', function () {
             });
 
             it('should clear registration form', function () {
-                expect($scope.username).toEqual('');
-                expect($scope.password).toEqual('');
-                expect($scope.repeatPassword).toEqual('');
+                expect(subject.username).toEqual('');
+                expect(subject.password).toEqual('');
+                expect(subject.repeatPassword).toEqual('');
             });
 
             it('should set registrationSucceed equal TRUE', function () {
-                expect($scope.registrationSucceed).toBeTruthy();
+                expect(subject.alerts.registrationSucceed).toBeTruthy();
             });
         });
 
@@ -83,13 +83,13 @@ describe('RegistrationFormController', function () {
             });
 
             it('data should still be in the form', function () {
-                expect($scope.username).toEqual('John_Snow');
-                expect($scope.password).toEqual('123');
-                expect($scope.repeatPassword).toEqual('123');
+                expect(subject.username).toEqual('John_Snow');
+                expect(subject.password).toEqual('123');
+                expect(subject.repeatPassword).toEqual('123');
             });
 
             it('should set userIsAlreadyExists equal TRUE', function () {
-                expect($scope.userIsAlreadyExists).toBeTruthy();
+                expect(subject.alerts.userIsAlreadyExists).toBeTruthy();
             });
         });
     });

@@ -1,20 +1,20 @@
 (function () {
     angular.module('timetableApp.authentication').controller('RegistrationFormController',
-        ['$scope', 'authenticationService', RegistrationFormController]);
+        ['authenticationService', RegistrationFormController]);
 
-    function RegistrationFormController($scope, authenticationService) {
+    function RegistrationFormController(authenticationService) {
+        var vm = this;
 
-        $scope.username = '';
-        $scope.password = '';
-        $scope.repeatPassword = '';
+        vm.username = '';
+        vm.password = '';
+        vm.repeatPassword = '';
 
-        $scope.registrationSucceed = false;
-        $scope.userIsAlreadyExists = false;
+        vm.alerts = {};
 
-        $scope.submitRegistration = submitRegistration;
+        vm.submitRegistration = submitRegistration;
 
         function submitRegistration() {
-            if ($scope.password !== $scope.repeatPassword) {
+            if (vm.password !== vm.repeatPassword) {
                 alert('Different passwords');
                 return;
             }
@@ -26,28 +26,28 @@
         }
 
         function clearPreviousSubmitResults() {
-            $scope.registrationSucceed = false;
-            $scope.userIsAlreadyExists = false;
+            vm.alerts.registrationSucceed = false;
+            vm.alerts.userIsAlreadyExists = false;
         }
 
         function clearForm() {
-            $scope.username = '';
-            $scope.repeatPassword = '';
-            $scope.password = '';
+            vm.username = '';
+            vm.repeatPassword = '';
+            vm.password = '';
         }
 
         function showRegistrationSucceed() {
-            $scope.registrationSucceed = true;
+            vm.alerts.registrationSucceed = true;
         }
 
         function showUserIsAlreadyExists() {
-            $scope.userIsAlreadyExists = true;
+            vm.alerts.userIsAlreadyExists = true;
         }
 
         function getInputUser() {
             return {
-                username: $scope.username,
-                password: $scope.password
+                username: vm.username,
+                password: vm.password
             }
         }
     }

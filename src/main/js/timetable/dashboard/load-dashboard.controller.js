@@ -3,22 +3,23 @@
         ['$window', 'authenticationService', LoadDashboardController]);
 
     function LoadDashboardController($window, authenticationService) {
+        var vm = this;
 
-        authenticationService.getCurrentUser()
-            .then(chooseAndRedirectDashboard, showError);
+        vm.alerts = {};
 
+        activate();
+
+        function activate() {
+            authenticationService.getCurrentUser()
+                .then(chooseAndRedirectDashboard);
+        }
 
         function chooseAndRedirectDashboard(response) {
-
             if (response.data.username != null) {
                 $window.location.href = '#!/userDashboard';
             } else {
                 $window.location.href = '#!/anonymousDashboard';
             }
-        }
-
-        function showError() {
-            console.log('Unable to load current user');
         }
     }
 })();

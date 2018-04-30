@@ -1,20 +1,27 @@
 (function () {
     angular.module('timetableApp.dashboard').controller('UserDashboardController',
-        ['$scope', '$window', 'authenticationService', UserDashboardController]);
+        ['$window', 'authenticationService', UserDashboardController]);
 
-    function UserDashboardController($scope, $window, authenticationService) {
+    function UserDashboardController($window, authenticationService) {
+        var vm = this;
 
-        $scope.logout = logout;
+        vm.logout = logout;
+        vm.currentUser = {};
+        vm.alerts = {};
 
-        authenticationService.getCurrentUser()
-            .then(updateCurrentUser, showError);
+        activate();
+
+        function activate() {
+            authenticationService.getCurrentUser()
+                .then(updateCurrentUser, showError);
+        }
 
         function updateCurrentUser(response) {
-            $scope.currentUser = response.data;
+            vm.currentUser = response.data;
         }
 
         function showError() {
-            console.log('fail to load current user');
+            vm.alerts.userLoadError = true;
         }
 
         function logout() {
@@ -22,7 +29,6 @@
         }
 
         function redirectDashboard() {
-            console.log('logout success');
             $window.location.href = '#!/dashboard'
         }
     }

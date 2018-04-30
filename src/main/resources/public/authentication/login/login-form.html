@@ -1,17 +1,17 @@
 <a href="#!/registration">Registration</a>
-<span ng-if="loginFailed">Wrong username or password</span>
+<span ng-if="vm.alerts.loginFailed">Wrong username or password</span>
 <hr/>
 Login
 <label>
     Username:
-    <input name="username" ng-model="username"/>
+    <input name="username" ng-model="vm.username"/>
 </label>
 
 <label>
-    Username:
-    <input name="password" ng-model="password"/>
+    Password:
+    <input name="password" ng-model="vm.password"/>
 </label>
 
-<button ng-click="submitLogin()">Login</button>
+<button ng-click="vm.submitLogin()">Login</button>
 
 

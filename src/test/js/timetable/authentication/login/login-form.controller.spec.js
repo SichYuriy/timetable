@@ -10,7 +10,7 @@ describe('LoginFormController', function () {
     var $scope;
     var $window;
     var authenticationService;
-    var ctrl;
+    var subject;
 
     beforeEach(inject(function (_$rootScope_, _$controller_, _$q_) {
         $rootScope = _$rootScope_;
@@ -27,7 +27,7 @@ describe('LoginFormController', function () {
     });
 
     beforeEach(function () {
-        ctrl = $controller('LoginFormController', {
+        subject = $controller('LoginFormController', {
             $scope: $scope,
             $window: $window,
             authenticationService: authenticationService
@@ -36,21 +36,21 @@ describe('LoginFormController', function () {
 
     describe('initialization', function () {
         it('should init default username and password', function () {
-            expect($scope.username).toEqual('');
-            expect($scope.password).toEqual('');
+            expect(subject.username).toEqual('');
+            expect(subject.password).toEqual('');
         });
 
         it('should init login failed', function () {
-            expect($scope.loginFailed).toBeFalsy();
+            expect(subject.alerts.loginFailed).toBeFalsy();
         });
     });
 
     describe('submit login', function () {
         beforeEach(function () {
-            $scope.username = 'John_Snow';
-            $scope.password = '123';
+            subject.username = 'John_Snow';
+            subject.password = '123';
 
-            $scope.submitLogin();
+            subject.submitLogin();
         });
 
         it('should call authentication service' , function () {
@@ -78,7 +78,7 @@ describe('LoginFormController', function () {
             });
 
             it('should set loginFailed', function () {
-                expect($scope.loginFailed).toBeTruthy();
+                expect(subject.alerts.loginFailed).toBeTruthy();
             })
         });
     });

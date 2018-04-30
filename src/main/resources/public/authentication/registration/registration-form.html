@@ -1,19 +1,19 @@
 Registration
-<span ng-if="registrationSucceed">Registration Succeed</span>
-<span ng-if="userIsAlreadyExists">Sorry! Username is already taken by another user.</span>
+<span ng-if="vm.alerts.registrationSucceed">Registration Succeed</span>
+<span ng-if="vm.alerts.userIsAlreadyExists">Sorry! Username is already taken by another user.</span>
 <label>
     Username:
-    <input name="username" ng-model="username"/>
+    <input name="username" ng-model="vm.username"/>
 </label>
 
 <label>
     Password:
-    <input name="password" ng-model="password"/>
+    <input name="password" ng-model="vm.password"/>
 </label>
 
 <label>
     Repeat Password:
-    <input name="password" ng-model="repeatPassword"/>
+    <input name="password" ng-model="vm.repeatPassword"/>
 </label>
 
-<button ng-click="submitRegistration()">Register</button>
+<button ng-click="vm.submitRegistration()">Register</button>
