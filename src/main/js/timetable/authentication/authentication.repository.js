@@ -1,8 +1,6 @@
 (function () {
-    angular.module('timetableApp.authentication').factory('authenticationRepository',
-        ['$http', function ($http) {
-            return new AuthenticationRepository($http);
-        }]);
+    angular.module('timetableApp.authentication').service('authenticationRepository',
+        ['$http', AuthenticationRepository]);
 
     function AuthenticationRepository($http) {
         this.login = login;
