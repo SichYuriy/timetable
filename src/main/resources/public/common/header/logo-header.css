@@ -11,11 +11,22 @@
     max-width: 40px;
 }
 
-.user-link {
+.icon {
+    max-height: 16px;
+    max-width: 16px;
+}
+
+.user-link, .language-link{
     color: white;
 }
 
-.user-link:hover {
+.user-link:hover, .language-link:hover {
     cursor: pointer;
     color: white;
+}
+
+.language-picker {
+    font-size: 10pt;
+    margin-top: 8px;
+    margin-right:10px;
 }

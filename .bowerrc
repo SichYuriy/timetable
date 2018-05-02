@@ -1,4 +1,4 @@
 {
-  "directory": "target/classes/templates/bower_components",
+  "directory": "target/classes/public/bower_components",
   "interactive": false
 }

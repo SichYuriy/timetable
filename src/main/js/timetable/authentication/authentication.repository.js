@@ -9,7 +9,6 @@
         this.register = register;
 
         function login(user) {
-            console.log(user);
             return $http.post('/session/login', user);
         }
 

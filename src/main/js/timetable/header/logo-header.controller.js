@@ -1,17 +1,18 @@
 (function () {
     angular.module('timetableApp.authentication').controller('LogoHeaderController',
-        ['$scope', '$interval', "$window", 'authenticationService', LogoHeaderController]);
+        ['$scope', '$interval', '$window', '$translate', 'authenticationService', LogoHeaderController]);
 
-    function LogoHeaderController($scope, $interval, $window, authenticationService) {
+    function LogoHeaderController($scope, $interval, $window, $translate, authenticationService) {
         var vm = this;
 
         vm.currentTime = Date.now();
+        vm.currentLanguage = $translate.use();
         vm.logout = logout;
+        vm.changeLanguage = changeLanguage;
 
         activate();
         
         function activate() {
-            console.log($scope.currentUser);
             $interval(updateCurrentTime, 1000);
         }
 
@@ -25,6 +26,15 @@
 
         function redirectDashboard() {
             $window.location.href = '#!/dashboard'
+        }
+
+        function changeLanguage() {
+            if (vm.currentLanguage === 'en') {
+                vm.currentLanguage = 'ua';
+            } else {
+                vm.currentLanguage = 'en';
+            }
+            $translate.use(vm.currentLanguage);
         }
     }
 })();

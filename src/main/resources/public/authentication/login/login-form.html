@@ -1,22 +1,22 @@
 <logo-header></logo-header>
 
 <div class="col-md-3 col-md-offset-4 authentication-form box-shadow">
-    <h2>Login</h2>
+    <h2>{{'LOGIN_FORM.TITLE' | translate}}</h2>
     <hr>
     <div ng-if="vm.alerts.loginFailed" class="alert alert-danger">
-        Wrong username or password!
+        {{'LOGIN_FORM.LOGIN_FAILED' | translate}}
     </div>
 
     <form>
         <div class="form-group">
-            <label for="username">Username:</label>
+            <label for="username">{{'LOGIN_FORM.USERNAME' | translate}}</label>
             <input class="form-control" id="username" ng-model="vm.username">
         </div>
         <div class="form-group">
-            <label for="password">Password:</label>
+            <label for="password">{{'LOGIN_FORM.PASSWORD' | translate}}</label>
             <input type="password" class="form-control" id="password" ng-model="vm.password">
         </div>
-        <button ng-click="vm.submitLogin()" class="btn btn-primary">Submit</button>
+        <button ng-click="vm.submitLogin()" class="btn btn-primary">{{'LOGIN_FORM.SUBMIT' | translate}}</button>
     </form>
 </div>
 

@@ -16,8 +16,13 @@
             </div>
         </div>
         <div class="settings pull-right" ng-if="!vm.currentUser.username">
-            <a class="btn btn-default" href="#!/login">Sign in</a>
-            <a class="btn btn-success" href="#!/registration">Sign up</a>
+            <a class="btn btn-default" href="#!/login">{{'LOGIN' | translate}}</a>
+            <a class="btn btn-success" href="#!/registration">{{'REGISTRATION' | translate}}</a>
+        </div>
+        <div class="language-picker pull-right">
+            <a class="language-link" ng-click="vm.changeLanguage()">
+                {{vm.currentLanguage}} <img src="pictures/refresh.png" class="icon"/>
+            </a>
         </div>
     </div>
 </div>
