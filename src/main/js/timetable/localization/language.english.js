@@ -18,7 +18,8 @@
                 USER_EXISTS: 'Sorry! Username is already taken by another user.',
                 SUCCESS: 'Success! Registration completed.',
                 REPEAT_PASSWORD: 'Repeat Password:',
-                SUBMIT: 'Submit'
+                SUBMIT: 'Submit',
+                DIFFERENT_PASSWORDS: 'Passwords should not be different'
             }
         }
     }

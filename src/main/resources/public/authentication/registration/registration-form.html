@@ -9,20 +9,23 @@
     <div ng-if="vm.alerts.userIsAlreadyExists" class="alert alert-danger">
         {{'REGISTRATION_FORM.USER_EXISTS' | translate}}
     </div>
+    <div ng-if="vm.alerts.differentPasswords" class="alert alert-danger">
+        {{'REGISTRATION_FORM.DIFFERENT_PASSWORDS' | translate}}
+    </div>
 
-    <form>
-        <div class="form-group">
+    <form ng-submit="vm.submitRegistration()">
+        <div class="form-group" >
             <label for="username">{{'LOGIN_FORM.USERNAME' | translate}}</label>
-            <input class="form-control" id="username" ng-model="vm.username">
+            <input class="form-control" id="username" ng-model="vm.username" required>
         </div>
         <div class="form-group">
             <label for="password">{{'LOGIN_FORM.PASSWORD' | translate}}</label>
-            <input type="password" class="form-control" id="password" ng-model="vm.password">
+            <input type="password" class="form-control" id="password" ng-model="vm.password" required>
         </div>
         <div class="form-group">
             <label for="repeatPassword">{{'REGISTRATION_FORM.REPEAT_PASSWORD' | translate}}</label>
-            <input type="password" class="form-control" id="repeatPassword" ng-model="vm.repeatPassword">
+            <input type="password" class="form-control" id="repeatPassword" ng-model="vm.repeatPassword" required>
         </div>
-        <button ng-click="vm.submitRegistration()" class="btn btn-primary">{{'REGISTRATION_FORM.SUBMIT' | translate}}</button>
+        <input type="submit" class="btn btn-primary" value="{{'REGISTRATION_FORM.SUBMIT' | translate}}">
     </form>
 </div>

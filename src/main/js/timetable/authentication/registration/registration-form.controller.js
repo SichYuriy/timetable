@@ -15,7 +15,7 @@
 
         function submitRegistration() {
             if (vm.password !== vm.repeatPassword) {
-                alert('Different passwords');
+                vm.alerts.differentPasswords = true;
                 return;
             }
             clearPreviousSubmitResults();
@@ -28,6 +28,7 @@
         function clearPreviousSubmitResults() {
             vm.alerts.registrationSucceed = false;
             vm.alerts.userIsAlreadyExists = false;
+            vm.alerts.differentPasswords = false;
         }
 
         function clearForm() {
