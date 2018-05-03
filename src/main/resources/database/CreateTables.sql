@@ -4,3 +4,23 @@ CREATE TABLE `user` (
   `password` VARCHAR(75) NOT NULL,
   PRIMARY KEY (`id`)
 );
+
+CREATE TABLE `timetable` (
+  `id`                BIGINT        NOT NULL AUTO_INCREMENT,
+  `title`             NVARCHAR(256) NOT NULL,
+  `description`       NVARCHAR(1024),
+  `private`           TINYINT(1)    NOT NULL DEFAULT 0,
+  `active`            TINYINT(1)    NOT NULL DEFAULT 0,
+  `subscribers_count` INTEGER       NOT NULL DEFAULT 0,
+  `use_period`        TINYINT(1)    NOT NULL DEFAULT 0,
+  `period_days`       INTEGER       NOT NULL DEFAULT 0,
+  `period_weeks`      INTEGER       NOT NULL DEFAULT 0,
+  `activated_before`  TINYINT(1)    NOT NULL DEFAULT 0,
+  `deleted`           TINYINT(1)    NOT NULL DEFAULT 0,
+  `owner_id`          BIGINT        NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_timetable_user_index` (`owner_id` ASC),
+  CONSTRAINT `fk_timetable_user`
+    FOREIGN KEY (`owner_id`)
+    REFERENCES `user` (`id`)
+);
