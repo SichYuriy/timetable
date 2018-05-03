@@ -5,24 +5,28 @@ import com.gmail.at.sichyuriyy.user.repository.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class UserServiceImplTest {
 
     private UserService subject;
+    @Mock
     private UserRepository userRepository;
+    @Mock
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Before
     public void setUp() {
-        userRepository = mock(UserRepository.class);
-        bCryptPasswordEncoder = mock(BCryptPasswordEncoder.class);
+        MockitoAnnotations.initMocks(this);
         subject = new UserServiceImpl(userRepository, bCryptPasswordEncoder);
     }
 

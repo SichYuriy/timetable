@@ -20,6 +20,15 @@
                 REPEAT_PASSWORD: 'Repeat Password:',
                 SUBMIT: 'Submit',
                 DIFFERENT_PASSWORDS: 'Passwords should not be different'
+            },
+            TIMETABLE_FORM: {
+                TITLE: 'Title: ',
+                DESCRIPTION: 'Description: ',
+                IS_PRIVATE: 'Is private: '
+            },
+            CREATE_TIMETABLE_FORM: {
+                TITLE: 'Create new timetable',
+                SUBMIT: 'Save'
             }
         }
     }

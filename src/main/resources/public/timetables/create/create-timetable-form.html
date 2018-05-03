@@ -1,0 +1,28 @@
+<logo-header current-user="vm.currentUser"></logo-header>
+
+<div class="col-md-4 col-md-offset-4 authentication-form box-shadow">
+    <h2>{{'CREATE_TIMETABLE_FORM.TITLE' | translate}}</h2>
+    <hr>
+    <div ng-if="vm.alerts.loginFailed" class="alert alert-danger">
+        {{'CREATE_TIMETABLE_FORM.LOGIN_FAILED' | translate}}
+    </div>
+
+    <form ng-submit="vm.submitCreation()">
+        <div class="form-group">
+            <label for="title">{{'TIMETABLE_FORM.TITLE' | translate}}</label>
+            <input class="form-control" id="title" ng-model="vm.timetable.title" required>
+        </div>
+        <div class="form-group">
+            <label for="description">{{'TIMETABLE_FORM.DESCRIPTION' | translate}}</label>
+            <textarea class="form-control" rows="5" id="description" ng-model="vm.timetable.description"></textarea>
+        </div>
+
+        <div class="form-group">
+            {{'TIMETABLE_FORM.IS_PRIVATE' | translate}} <input type="checkbox" ng-model="vm.timetable.isPrivate">
+        </div>
+        <input type="submit" class="btn btn-primary" value="{{'CREATE_TIMETABLE_FORM.SUBMIT' | translate}}">
+    </form>
+</div>
+
+
+

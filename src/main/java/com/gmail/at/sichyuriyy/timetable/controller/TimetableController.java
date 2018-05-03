@@ -6,11 +6,12 @@ import com.gmail.at.sichyuriyy.timetable.dto.CreateTimetableTransformer;
 import com.gmail.at.sichyuriyy.timetable.dto.TimetableDto;
 import com.gmail.at.sichyuriyy.timetable.dto.TimetableTransformer;
 import com.gmail.at.sichyuriyy.timetable.service.TimetableService;
+import com.gmail.at.sichyuriyy.timetable.validation.CreateTimetableValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/timetables")
@@ -29,8 +30,13 @@ public class TimetableController {
         this.timetableTransformer = timetableTransformer;
     }
 
+    @InitBinder
+    public void initBinder(WebDataBinder webDataBinder) {
+        webDataBinder.setValidator(new CreateTimetableValidator());
+    }
+
     @PostMapping
-    public TimetableDto createTimetable(@RequestBody CreateTimetableDto timetableDto) {
+    public TimetableDto createTimetable(@Valid @RequestBody CreateTimetableDto timetableDto) {
         Timetable timetable = createTimetableTransformer.fromDto(timetableDto);
         return timetableTransformer.toDto(timetableService.create(timetable));
     }

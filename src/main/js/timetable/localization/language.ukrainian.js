@@ -20,6 +20,15 @@
                 REPEAT_PASSWORD: 'Пароль ще раз:',
                 SUBMIT: 'Зареєструватися',
                 DIFFERENT_PASSWORDS: 'Паролі мають співпадати'
+            },
+            TIMETABLE_FORM: {
+                TITLE: 'Назва: ',
+                DESCRIPTION: 'Опис: ',
+                IS_PRIVATE: 'Приватний: '
+            },
+            CREATE_TIMETABLE_FORM: {
+                TITLE: 'Створити розклад',
+                SUBMIT: 'Зберегти'
             }
         }
     }
