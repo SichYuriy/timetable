@@ -3,7 +3,7 @@
         ['$window', 'timetableService', 'authenticationService', CreateTimetableController]);
 
     function CreateTimetableController($window, timetableService, authenticationService) {
-        var vm = this;
+        let vm = this;
 
         vm.currentUser = {};
         vm.timetable = {};
@@ -20,7 +20,8 @@
                 periodDays: 0,
                 periodWeeks: 0
             };
-            authenticationService.getCurrentUser().then(updateCurrentUser);
+            authenticationService.getCurrentUser()
+                .then(u => vm.currentUser = u);
         }
 
         function submitCreation() {
@@ -29,10 +30,6 @@
 
         function redirectTimetable(response) {
             console.log(response.data);
-        }
-
-        function updateCurrentUser(response) {
-            vm.currentUser = response.data;
         }
     }
 })();

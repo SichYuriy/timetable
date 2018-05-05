@@ -3,7 +3,7 @@
         ['authenticationService', '$window', LoginFormController]);
 
     function LoginFormController(authenticationService, $window) {
-        var vm = this;
+        let vm = this;
 
         vm.username = '';
         vm.password = '';
@@ -12,7 +12,7 @@
         vm.submitLogin = submitLogin;
 
         function submitLogin() {
-            var user = getInputUser();
+            let user = getInputUser();
             authenticationService.login(user).then(redirectDashboard, showLoginFailed);
         }
 

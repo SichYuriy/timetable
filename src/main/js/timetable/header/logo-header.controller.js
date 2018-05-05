@@ -3,7 +3,7 @@
         ['$scope', '$interval', '$window', '$translate', 'authenticationService', LogoHeaderController]);
 
     function LogoHeaderController($scope, $interval, $window, $translate, authenticationService) {
-        var vm = this;
+        let vm = this;
 
         vm.currentTime = Date.now();
         vm.currentLanguage = $translate.use();
