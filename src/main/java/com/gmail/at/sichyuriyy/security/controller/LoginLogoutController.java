@@ -37,8 +37,7 @@ public class LoginLogoutController {
 
     @GetMapping("/currentUser")
     public UserDto getCurrentUser() {
-        return userTransformer
-                .toDto(securityService.findLoggedInUser().orElse(null));
+        return securityService.findLoggedInUser().map(userTransformer::toDto).orElse(null);
     }
 
     @ExceptionHandler(UsernameNotFoundException.class)
