@@ -1,8 +1,8 @@
 (function () {
     angular.module('timetableApp.timetables').controller('ViewTimetableController',
-        ['$routeParams', 'authenticationService', ViewTimetableController]);
+        ['$routeParams', 'timetableService', 'authenticationService', ViewTimetableController]);
 
-    function ViewTimetableController($routeParams, authenticationService) {
+    function ViewTimetableController($routeParams, timetableService, authenticationService) {
         let vm = this;
 
         vm.timetable = {};
@@ -11,10 +11,8 @@
         activate();
 
         function activate() {
-            vm.timetable = {
-                id: $routeParams.id,
-                title: 'Title TODO:'
-            };
+            timetableService.getById($routeParams.id)
+                .then(t => vm.timetable = t);
 
             authenticationService.getCurrentUser()
                 .then(u => vm.currentUser = u);

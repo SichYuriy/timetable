@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -43,5 +44,17 @@ public class TimetableServiceImpl implements TimetableService {
         User owner = securityService.findLoggedInUser().orElseThrow(ThereIsNoUserLoggedIn::new);
         PageRequest pageRequest = PageRequest.of(pageNum, TIMETABLE_PAGE_SIZE);
         return timetableRepository.findAllByActiveFalseAndOwnerAndDeletedFalseOrderByIdDesc(owner, pageRequest);
+    }
+
+    @Override
+    public Optional<Timetable> getSecuredTimetableById(Long id) {
+        Optional<Timetable> publicTimetable = timetableRepository.findByIdAndIsPrivateFalseAndDeletedFalse(id);
+        if (publicTimetable.isPresent()) {
+            return publicTimetable;
+        }
+        return securityService.findLoggedInUser()
+                .map(u -> timetableRepository
+                        .findPublicOrOwnTimetableById(id, u.getId())
+                        .orElse(null));
     }
 }

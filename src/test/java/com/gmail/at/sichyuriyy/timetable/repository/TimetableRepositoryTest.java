@@ -17,6 +17,7 @@ import javax.transaction.Transactional;
 import java.util.Arrays;
 import java.util.Optional;
 
+import static com.gmail.at.sichyuriyy.timetable.TimetableTestData.getTestTimetable;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -106,19 +107,88 @@ public class TimetableRepositoryTest {
         assertThat(actual).containsExactly(timetable1);
     }
 
-    private Timetable getTestTimetable(User owner) {
-        return Timetable.builder()
-                .title("title")
-                .description("description")
-                .isPrivate(false)
-                .activatedBefore(false)
-                .active(false)
-                .usePeriod(true)
-                .periodDays(1)
-                .periodWeeks(0)
-                .subscribersCount(0)
-                .owner(owner)
-                .deleted(false)
-                .build();
+    @Test
+    public void findByIdAndIsPrivateFalseAndDeletedFalse_whenAllMatch_shouldReturnMatchedResult() {
+        User user1 = User.builder().username("user1").password("1").build();
+        userRepository.save(user1);
+
+        Timetable timetable = getTestTimetable(user1);
+        subject.save(timetable);
+
+        Optional<Timetable> actual = subject.findByIdAndIsPrivateFalseAndDeletedFalse(timetable.getId());
+
+        assertThat(actual).containsSame(timetable);
+    }
+
+    @Test
+    public void findByIdAndIsPrivateFalseAndDeletedFalse_whenPrivate_shouldNotMatch() {
+        User user1 = User.builder().username("user1").password("1").build();
+        userRepository.save(user1);
+
+        Timetable timetable = getTestTimetable(user1);
+        timetable.setIsPrivate(true);
+        subject.save(timetable);
+
+        Optional<Timetable> actual = subject.findByIdAndIsPrivateFalseAndDeletedFalse(timetable.getId());
+
+        assertThat(actual).isEmpty();
+    }
+
+    @Test
+    public void findByIdAndIsPrivateFalseAndDeletedFalse_whenDeleted_shouldNotMatch() {
+        User user1 = User.builder().username("user1").password("1").build();
+        userRepository.save(user1);
+
+        Timetable timetable = getTestTimetable(user1);
+        timetable.setDeleted(true);
+        subject.save(timetable);
+
+        Optional<Timetable> actual = subject.findByIdAndIsPrivateFalseAndDeletedFalse(timetable.getId());
+
+        assertThat(actual).isEmpty();
+    }
+
+    @Test
+    public void findPublicOrOwnTimetableById_whenPublicButAnotherOwner_shouldMatch() {
+        User user1 = User.builder().username("user1").password("1").build();
+        User user2 = User.builder().username("user2").password("1").build();
+        userRepository.saveAll(Arrays.asList(user1, user2));
+
+        Timetable timetable = getTestTimetable(user1);
+        subject.save(timetable);
+
+        Optional<Timetable> actual = subject.findPublicOrOwnTimetableById(timetable.getId(), user2.getId());
+
+        assertThat(actual).containsSame(timetable);
+    }
+
+    @Test
+    public void findPublicOrOwnTimetableById_whenPrivateAndAnotherOwner_shouldNotMatch() {
+        User user1 = User.builder().username("user1").password("1").build();
+        User user2 = User.builder().username("user2").password("1").build();
+        userRepository.saveAll(Arrays.asList(user1, user2));
+
+        Timetable timetable = getTestTimetable(user1);
+        timetable.setIsPrivate(true);
+        subject.save(timetable);
+
+        Optional<Timetable> actual = subject.findPublicOrOwnTimetableById(timetable.getId(), user2.getId());
+
+        assertThat(actual).isEmpty();
+    }
+
+    @Test
+    public void findPublicOrOwnTimetableById_whenPrivateButSameOwner_shouldMatch() {
+        User user1 = User.builder().username("user1").password("1").build();
+        User user2 = User.builder().username("user2").password("1").build();
+        userRepository.saveAll(Arrays.asList(user1, user2));
+
+        Timetable timetable = getTestTimetable(user1);
+        timetable.setIsPrivate(true);
+        subject.save(timetable);
+
+        Optional<Timetable> actual = subject.findPublicOrOwnTimetableById(timetable.getId(), user1.getId());
+
+        assertThat(actual).containsSame(timetable);
     }
 }

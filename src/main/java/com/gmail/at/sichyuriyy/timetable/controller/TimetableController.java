@@ -47,4 +47,10 @@ public class TimetableController {
         Page<Timetable> timetables = timetableService.getOwnNotActiveTimetables(pageNum);
         return timetables.map(timetableTransformer::toDto);
     }
+
+    @GetMapping("/{id}")
+    public TimetableDto getById(@PathVariable Long id) {
+        return timetableTransformer
+                .toDto(timetableService.getSecuredTimetableById(id).orElse(null));
+    }
 }
