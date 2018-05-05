@@ -23,6 +23,10 @@
                 template: '<registration-form></registration-form>'
             }).when('/createTimetable', {
                 template: '<create-timetable-form></create-timetable-form>'
+            }).when('/viewTimetable/:id', {
+                template: '<view-timetable></view-timetable>'
+            }).when('/editTimetable/:id', {
+                template: '<edit-timetable></edit-timetable>'
             }).otherwise('/dashboard');
         }
     ]);

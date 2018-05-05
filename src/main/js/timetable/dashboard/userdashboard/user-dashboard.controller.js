@@ -1,26 +1,23 @@
 (function () {
     angular.module('timetableApp.dashboard').controller('UserDashboardController',
-        ['$window', 'authenticationService', UserDashboardController]);
+        ['$window', 'authenticationService', 'timetableService', UserDashboardController]);
 
-    function UserDashboardController($window, authenticationService) {
-        var vm = this;
+    function UserDashboardController($window, authenticationService, timetableService) {
+        let vm = this;
 
         vm.currentUser = {};
         vm.alerts = {};
+        vm.ownAndNotActiveTimetables = [];
 
         activate();
 
         function activate() {
             authenticationService.getCurrentUser()
-                .then(updateCurrentUser, showError);
+                .then(u => vm.currentUser = u);
+
+            timetableService.getFewMyNotActiveTimetables()
+                .then(timetables => vm.ownAndNotActiveTimetables = timetables);
         }
 
-        function updateCurrentUser(response) {
-            vm.currentUser = response.data;
-        }
-
-        function showError() {
-            vm.alerts.userLoadError = true;
-        }
     }
 })();

@@ -1,3 +1,5 @@
 <logo-header current-user="vm.currentUser"></logo-header>
 Hello {{vm.currentUser.username}}
 <a href="#!/createTimetable">Create timetable</a>
+<hr/>
+<a ng-repeat="t in vm.ownAndNotActiveTimetables" href="#!/viewTimetable/{{t.id}}" >{{t.title}}</a>

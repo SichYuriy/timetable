@@ -3,7 +3,7 @@
         ['$window', 'authenticationService', LoadDashboardController]);
 
     function LoadDashboardController($window, authenticationService) {
-        var vm = this;
+        let vm = this;
 
         vm.alerts = {};
 
@@ -14,8 +14,8 @@
                 .then(chooseAndRedirectDashboard);
         }
 
-        function chooseAndRedirectDashboard(response) {
-            if (response.data.username != null) {
+        function chooseAndRedirectDashboard(user) {
+            if (user.username != null) {
                 $window.location.href = '#!/userDashboard';
             } else {
                 $window.location.href = '#!/anonymousDashboard';

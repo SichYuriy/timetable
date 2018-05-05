@@ -8,6 +8,7 @@ import com.gmail.at.sichyuriyy.timetable.dto.TimetableTransformer;
 import com.gmail.at.sichyuriyy.timetable.service.TimetableService;
 import com.gmail.at.sichyuriyy.timetable.validation.CreateTimetableValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,5 +40,11 @@ public class TimetableController {
     public TimetableDto createTimetable(@Valid @RequestBody CreateTimetableDto timetableDto) {
         Timetable timetable = createTimetableTransformer.fromDto(timetableDto);
         return timetableTransformer.toDto(timetableService.create(timetable));
+    }
+
+    @GetMapping(value = "/ownAndNotActive")
+    public Page<TimetableDto> getOwnNotActiveTimetables(@RequestParam int pageNum) {
+        Page<Timetable> timetables = timetableService.getOwnNotActiveTimetables(pageNum);
+        return timetables.map(timetableTransformer::toDto);
     }
 }
