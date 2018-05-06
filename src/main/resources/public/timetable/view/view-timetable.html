@@ -11,9 +11,9 @@
         </div>
     </div>
     <div class="week">
-        <div ng-repeat="day in vm.days" class="day-column">
+        <div ng-repeat="dayTimetable in vm.dayTimetableList" class="day-column">
             <div class="day-title">
-                {{day}}
+                {{'DAY.' + dayTimetable.dayIndex | translate}}
             </div>
             <div class="day-body">
 

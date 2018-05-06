@@ -11,10 +11,10 @@
 
         vm.timetable = {};
         vm.currentUser = {};
-        vm.days = [];
+        vm.dayTimetableList = [];
         vm.fromDate = timeService.getFirstDayOfCurrentWeekFromMonday();
         vm.toDate = timeService.getLastDayOfCurrentWeekFromMonday();
-        vm.currentMonth = 5;
+        vm.currentMonth = new Date().getMonth() + 1;
         vm.startFromMonday = true;
 
         activate();
@@ -26,9 +26,17 @@
             authenticationService.getCurrentUser()
                 .then(u => vm.currentUser = u);
 
+            vm.dayTimetableList = initDayTimetableList(vm.fromDate);
+        }
 
-            vm.days = ['Monday', 'Tuesday', 'Wednesday',
-                'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        function initDayTimetableList(startDate) {
+            let days = [];
+            for (let i = 0; i < 7; i++) {
+                days.push({
+                    dayIndex: (startDate.getDay() + i) % 7
+                });
+            }
+            return days;
         }
     }
 })();
