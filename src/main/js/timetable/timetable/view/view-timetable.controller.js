@@ -7,6 +7,7 @@
 
         vm.timetable = {};
         vm.currentUser = {};
+        vm.days = [];
 
         activate();
 
@@ -16,6 +17,9 @@
 
             authenticationService.getCurrentUser()
                 .then(u => vm.currentUser = u);
+
+            vm.days = ['Monday', 'Tuesday', 'Wednesday',
+                'Thursday', 'Friday', 'Saturday', 'Sunday'];
         }
     }
 })();

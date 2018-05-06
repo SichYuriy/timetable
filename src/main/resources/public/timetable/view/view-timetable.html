@@ -1,0 +1,15 @@
+<logo-header current-user="vm.currentUser"></logo-header>
+<div class="col-md-10 col-md-offset-1 main-content">
+    <div class="week">
+        <div ng-repeat="day in vm.days" class="day-column">
+            <div class="day-title">
+                {{day}}
+            </div>
+            <div class="day-body">
+
+            </div>
+        </div>
+    </div>
+    View timetable {{vm.timetable.id}} - {{vm.timetable.title}}
+    <a href="#!/editTimetable/{{vm.timetable.id}}">Edit</a>
+</div>

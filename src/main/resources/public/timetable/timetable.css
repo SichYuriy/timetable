@@ -1,0 +1,20 @@
+.day-column {
+    width: 14%;
+    display: inline-block;
+}
+
+.day-title {
+    text-align: center;
+}
+
+.day-body {
+    margin: 2px;
+    border: #C1FA88 1px solid;
+    border-radius: 15px;
+    height: 800px;
+}
+
+.week {
+    width: 100%;
+    padding: 0 auto;
+}
