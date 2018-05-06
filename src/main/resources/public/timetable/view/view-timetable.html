@@ -16,7 +16,9 @@
                 {{'DAY.' + dayTimetable.dayIndex | translate}}
             </div>
             <div class="day-body">
-
+                <div ng-repeat="event in dayTimetable.events" timetable-event="{{event}}">
+                    {{event.startHour}} {{event.startMinute}}
+                </div>
             </div>
         </div>
     </div>

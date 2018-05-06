@@ -1,6 +1,7 @@
 .day-column {
     width: 14%;
     display: inline-block;
+    vertical-align: top;
 }
 
 .day-title {
