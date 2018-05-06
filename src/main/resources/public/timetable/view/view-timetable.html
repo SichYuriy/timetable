@@ -1,5 +1,15 @@
 <logo-header current-user="vm.currentUser"></logo-header>
 <div class="col-md-10 col-md-offset-1 main-content">
+    <div class="timetable-header">
+        <div class="row">
+            <div class="timetable-header_title col-md-offset-1 col-md-4">
+                {{vm.timetable.title}}
+            </div>
+            <div class="timetable-header_current-week col-md-4">
+                {{'MONTH.' + vm.currentMonth | translate}}: {{'VIEW_TIMETABLE.WEEK' | translate}} {{vm.fromDate | date:'dd'}} - {{vm.toDate | date:'dd'}}
+            </div>
+        </div>
+    </div>
     <div class="week">
         <div ng-repeat="day in vm.days" class="day-column">
             <div class="day-title">
@@ -10,6 +20,4 @@
             </div>
         </div>
     </div>
-    View timetable {{vm.timetable.id}} - {{vm.timetable.title}}
-    <a href="#!/editTimetable/{{vm.timetable.id}}">Edit</a>
 </div>

@@ -18,3 +18,16 @@
     width: 100%;
     padding: 0 auto;
 }
+
+.timetable-header {
+    padding-top: 15px;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    border-bottom: 3px solid #C1FA88
+}
+
+.timetable-header_title {
+    font-size: 15pt;
+    color: gray;
+    text-decoration: underline;
+}
