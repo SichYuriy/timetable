@@ -1,18 +1,21 @@
 describe('authenticationService', function () {
     beforeEach(module('timetableApp.authentication'));
 
-    var authenticationRepositoryMock;
-    var authenticationService;
+    let authenticationRepositoryMock;
+    let authenticationService;
 
-    var user;
-    var repositoryResult;
+    let user;
+    let repositoryResult;
 
     beforeEach(function () {
         user = {
             username: 'John_Snow',
             password: '123'
         };
-        repositoryResult = 'result';
+        repositoryResult = {
+            then: function () {
+            }
+        };
 
         authenticationRepositoryMock = {
             login: jasmine.createSpy().and.returnValue(repositoryResult),
@@ -31,26 +34,23 @@ describe('authenticationService', function () {
     });
 
     it('should delegate login to the repository', function () {
-        var actualResult = authenticationService.login(user);
+        let actualResult = authenticationService.login(user);
         expect(authenticationRepositoryMock.login).toHaveBeenCalledWith(user);
         expect(actualResult).toEqual(repositoryResult);
     });
 
     it('should delegate logout to the repository', function () {
-        var actualResult = authenticationService.logout();
+        authenticationService.logout();
         expect(authenticationRepositoryMock.logout).toHaveBeenCalled();
-        expect(actualResult).toEqual(repositoryResult);
     });
 
     it('should delegate getCurrentUser to the repository', function () {
-        var actualResult = authenticationService.getCurrentUser();
+        authenticationService.getCurrentUser();
         expect(authenticationRepositoryMock.getCurrentUser).toHaveBeenCalled();
-        expect(actualResult).toEqual(repositoryResult);
     });
 
     it('should delegate register to the repository', function () {
-        var actualResult = authenticationService.register(user);
+        authenticationService.register(user);
         expect(authenticationRepositoryMock.register).toHaveBeenCalledWith(user);
-        expect(actualResult).toEqual(repositoryResult);
     });
 });

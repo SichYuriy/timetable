@@ -1,8 +1,8 @@
 package com.gmail.at.sichyuriyy.timetable.service;
 
+import com.gmail.at.sichyuriyy.security.exception.ThereIsNoUserLoggedIn;
 import com.gmail.at.sichyuriyy.security.service.SecurityService;
 import com.gmail.at.sichyuriyy.timetable.domain.Timetable;
-import com.gmail.at.sichyuriyy.timetable.exception.ThereIsNoUserLoggedIn;
 import com.gmail.at.sichyuriyy.timetable.repository.TimetableRepository;
 import com.gmail.at.sichyuriyy.user.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,16 +1,16 @@
 describe('LoginFormController', function () {
     beforeEach(module('timetableApp.authentication'));
 
-    var $rootScope;
-    var $controller;
-    var $q;
+    let $rootScope;
+    let $controller;
+    let $q;
 
-    var deferredLogin;
+    let deferredLogin;
 
-    var $scope;
-    var $window;
-    var authenticationService;
-    var subject;
+    let $scope;
+    let $window;
+    let authenticationService;
+    let subject;
 
     beforeEach(inject(function (_$rootScope_, _$controller_, _$q_) {
         $rootScope = _$rootScope_;
