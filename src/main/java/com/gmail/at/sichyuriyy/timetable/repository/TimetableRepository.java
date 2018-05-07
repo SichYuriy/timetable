@@ -12,7 +12,6 @@ import java.util.Optional;
 
 public interface TimetableRepository extends JpaRepository<Timetable, Long> {
 
-
     Page<Timetable> findAllByActiveFalseAndOwnerAndDeletedFalseOrderByIdDesc(User owner, Pageable pageable);
 
     @Query("select t from Timetable t " +

@@ -24,3 +24,21 @@ CREATE TABLE `timetable` (
     FOREIGN KEY (`owner_id`)
     REFERENCES `user` (`id`)
 );
+
+CREATE TABLE `event` (
+  `id`                BIGINT        NOT NULL AUTO_INCREMENT,
+  `title`             NVARCHAR(256) NOT NULL,
+  `description`       NVARCHAR(1024),
+  `location`          NVARCHAR(512),
+  `start_date`		   DATETIME      NOT NULL,
+  `end_date`  		   DATETIME      NOT NULL,
+  `use_period`        TINYINT(1)    NOT NULL DEFAULT 0,
+  `period_days`       INTEGER       NOT NULL DEFAULT 0,
+  `period_weeks`      INTEGER       NOT NULL DEFAULT 0,
+  `timetable_id`	   BIGINT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_event_timetable_index` (`timetable_id` ASC),
+  CONSTRAINT `fk_event_timetable`
+	FOREIGN KEY (`timetable_id`)
+    REFERENCES `timetable` (`id`)
+);

@@ -32,7 +32,6 @@ public class TimetableRepositoryTest {
     @Autowired
     private UserRepository userRepository;
 
-
     @Test
     public void save_shouldSaveAllFields() {
         User user = User.builder().username("user1").password("123321").build();
