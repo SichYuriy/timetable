@@ -29,6 +29,11 @@ public class TimetableServiceImpl implements TimetableService {
     }
 
     @Override
+    public Optional<Timetable> getById(Long id) {
+        return timetableRepository.findById(id);
+    }
+
+    @Override
     public Timetable create(Timetable timetable) {
         User owner = securityService.findLoggedInUser().orElseThrow(ThereIsNoUserLoggedIn::new);
         timetable.setActivatedBefore(false);
@@ -56,5 +61,11 @@ public class TimetableServiceImpl implements TimetableService {
                 .map(u -> timetableRepository
                         .findPublicOrOwnTimetableById(id, u.getId())
                         .orElse(null));
+    }
+
+    @Override
+    public Boolean hasViewAccess(User user, Timetable timetable) {
+        return !timetable.getIsPrivate()
+                || user.getId().equals(timetable.getOwner().getId());
     }
 }

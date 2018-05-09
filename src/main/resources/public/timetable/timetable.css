@@ -13,6 +13,7 @@
     border: #C1FA88 1px solid;
     border-radius: 15px;
     height: 800px;
+    position: relative;
 }
 
 .week {
@@ -31,4 +32,14 @@
     font-size: 15pt;
     color: gray;
     text-decoration: underline;
+}
+
+.event {
+    width: 100%;
+    position: absolute;
+    border: 3px solid #C1FA88;
+    border-radius: 20px;
+    padding: 1px;
+    box-sizing: border-box;
+    overflow-y: hidden;
 }

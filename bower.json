@@ -8,6 +8,8 @@
     "angular-mocks": "1.5.x",
     "angular-route": "1.5.x",
     "bootstrap": "3.3.x",
-    "angular-translate": "2.17.x"
+    "angular-translate": "2.17.x",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.x",
+    "bootstrap-toggle": "^2.2.x"
   }
 }

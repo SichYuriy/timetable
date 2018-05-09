@@ -6,5 +6,41 @@ body {
 .main-content {
     background-color: white;
     height: 100%;
+
+}
+
+.form-title {
+    color: gray;
+    text-decoration: underline;
+}
+
+.add-button {
+    background-color: #C1FA88;
+    padding: 0;
+    color: gray;
+    width: 25px;
+    height: 25px;
+    font-size: 15px;
+    font-weight: bold;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.add-button:hover {
+    border: 1px solid black;
+}
+
+.margin-left-md {
+    margin-left: 10px;
+}
+
+.form-control-text {
+    line-height: 37px;
+}
+
+.no-left-padding {
+    padding-left: 0;
+}
+
+.no-right-padding {
+    padding-right: 0;
 }

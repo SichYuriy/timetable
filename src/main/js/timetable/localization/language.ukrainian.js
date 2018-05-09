@@ -55,6 +55,27 @@
                 '4': 'Четвер',
                 '5': "П'ятниця",
                 '6': 'Субота'
+            },
+            EVENT_FORM: {
+                TITLE: 'Назва:',
+                DESCRIPTION: 'Деталі/опис:',
+                LOCATION: 'Місце проведення:',
+                START_DATE: 'Початок:',
+                END_DATE: 'Кінець:',
+                USE_PERIOD: 'Встановити періодичність',
+                PERIOD_UNITS: 'Обрати масштаб періоду:   ',
+                WEEKS: 'тижні',
+                DAYS: 'дні',
+                PERIOD_LENGTH: 'Період:',
+                WEEKS_LENGTH: 'тиждень(ів)',
+                DAYS_LENGTH: 'день(ів)'
+            },
+            CREATE_EVENT_FORM: {
+                TITLE: 'Додати подію',
+                SUBMIT: 'Додати'
+            },
+            FORM: {
+                CANCEL: 'Відмінити'
             }
 
         }

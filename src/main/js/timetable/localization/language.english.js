@@ -55,6 +55,27 @@
                 '4': 'Thursday',
                 '5': 'Friday',
                 '6': 'Saturday'
+            },
+            EVENT_FORM: {
+                TITLE: 'Title:',
+                DESCRIPTION: 'Description:',
+                LOCATION: 'Where:',
+                START_DATE: 'Begins at:',
+                END_DATE: 'Ends at:',
+                USE_PERIOD: 'Set period',
+                PERIOD_UNITS: 'Choose period scale:   ',
+                WEEKS: 'weeks',
+                DAYS: 'days',
+                PERIOD_LENGTH: 'Period:',
+                WEEKS_LENGTH: 'week(s)',
+                DAYS_LENGTH: 'day(s)'
+            },
+            CREATE_EVENT_FORM: {
+                TITLE: 'Add new event',
+                SUBMIT: 'Create'
+            },
+            FORM: {
+                CANCEL: 'Cancel'
             }
         }
     }
