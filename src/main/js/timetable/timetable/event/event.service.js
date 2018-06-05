@@ -1,8 +1,8 @@
 (function () {
     angular.module('timetableApp.timetables').service('eventService',
-        ['eventRepository', EventService]);
+        ['eventRepository', 'timeUtilService', EventService]);
 
-    function EventService(eventRepository) {
+    function EventService(eventRepository, timeUtilService) {
         this.create = eventRepository.create;
         this.findEventsForPeriod = findEventsForPeriod;
 
@@ -14,16 +14,12 @@
 
         function parseStartEndDates(events) {
             return events.map(e => {
-                e.startDate = adjustForTimezone(new Date(e.startDate));
-                e.endDate = adjustForTimezone(new Date(e.endDate));
+                e.startDate = timeUtilService
+                    .convertFromGreenwichToLocalTime(new Date(e.startDate));
+                e.endDate = timeUtilService
+                    .convertFromGreenwichToLocalTime(new Date(e.endDate));
                 return e;
             });
-        }
-
-        function adjustForTimezone(date) {
-            let timeOffsetInMS = date.getTimezoneOffset() * 60000;
-            date.setTime(date.getTime() - timeOffsetInMS);
-            return date;
         }
     }
 })();

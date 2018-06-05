@@ -1,10 +1,10 @@
 (function () {
     angular.module('timetableApp.timetables').controller('ViewTimetableController',
-        ['$scope', '$routeParams', 'timetableService', 'timeService',
+        ['$scope', '$routeParams', 'timetableService', 'timeUtilService',
             'authenticationService', 'eventService', ViewTimetableController]);
 
     function ViewTimetableController($scope, $routeParams, timetableService,
-                                     timeService, authenticationService, eventService) {
+                                     timeUtilService, authenticationService, eventService) {
 
         const DATE_FORMAT = 'DD/MM/YYYY, HH:mm:ss';
 
@@ -13,8 +13,8 @@
         vm.timetable = {};
         vm.currentUser = {};
         vm.dayTimetableList = [];
-        vm.fromDate = timeService.getFirstDayOfCurrentWeekFromMonday();
-        vm.toDate = timeService.getLastDayOfCurrentWeekFromMonday();
+        vm.fromDate = timeUtilService.getFirstDayOfCurrentWeekFromMonday();
+        vm.toDate = timeUtilService.getLastDayOfCurrentWeekFromMonday();
         vm.currentMonth = new Date().getMonth();
         vm.newEvent = {};
         vm.initNewEvent = initNewEvent;
@@ -33,31 +33,10 @@
 
         function initDailyEvents(events) {
             vm.dayTimetableList = initDayTimetableList(vm.fromDate);
-            vm.dayTimetableList = initDayTimetableList(vm.fromDate);
             for (event of events) {
-                let index = event.startDate.getDate() - vm.fromDate.getDate();
+                let index = timeUtilService.getDaysBetween(event.startDate, vm.fromDate);
                 vm.dayTimetableList[index].events.push(event);
             }
-        }
-
-        function initStubbedData() {
-            vm.dayTimetableList = initDayTimetableList(vm.fromDate);
-            vm.dayTimetableList[1].events.push({
-                startHour: 8,
-                startMinute: 0,
-                duration: {
-                    hours: 1,
-                    minutes: 0
-                }
-            });
-            vm.dayTimetableList[0].events.push({
-                startHour: 6,
-                startMinute: 0,
-                duration: {
-                    hours: 1,
-                    minutes: 0
-                }
-            });
         }
 
         function initDayTimetableList(startDate) {

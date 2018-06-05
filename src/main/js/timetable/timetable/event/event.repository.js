@@ -12,10 +12,7 @@
 
         function findFroEventsPeriod(timetableId, startDate, endDate) {
             return $http.get('/timetables/' + timetableId + '/events', {
-                params: {
-                    startDate: startDate,
-                    endDate: endDate
-                }
+                params: {startDate, endDate}
             });
         }
     }

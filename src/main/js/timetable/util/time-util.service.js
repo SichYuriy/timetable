@@ -1,10 +1,15 @@
 (function () {
-    angular.module('timetableApp.timetables').service('timeService',
-        TimeService);
+    angular.module('timetableApp.timetables').service('timeUtilService',
+        TimeUtilService);
 
-    function TimeService() {
+    function TimeUtilService() {
+
+        const MILLISECONDS_IN_DAY = 1000 * 60 * 60 * 24;
+
         this.getFirstDayOfCurrentWeekFromMonday = getFirstDayOfCurrentWeekFromMonday;
         this.getLastDayOfCurrentWeekFromMonday = getLastDayOfCurrentWeekFromMonday;
+        this.convertFromGreenwichToLocalTime = convertFromGreenwichToLocalTime;
+        this.getDaysBetween = getDaysBetween;
 
         function getFirstDayOfCurrentWeekFromMonday() {
             let currentDate = new Date();
@@ -26,6 +31,16 @@
             currentDate.setSeconds(59);
             currentDate.setMilliseconds(999);
             return currentDate;
+        }
+
+        function convertFromGreenwichToLocalTime(date) {
+            let timeOffsetInMS = date.getTimezoneOffset() * 60000;
+            date.setTime(date.getTime() - timeOffsetInMS);
+            return date;
+        }
+
+        function getDaysBetween(from, to) {
+            return Math.floor(Math.abs(from.getTime() - to.getTime()) / MILLISECONDS_IN_DAY);
         }
     }
 })();

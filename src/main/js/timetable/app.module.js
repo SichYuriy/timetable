@@ -1,8 +1,9 @@
 (function () {
     'use strict';
+    angular.module('timetableApp.commonServices', []);
     angular.module('timetableApp.authentication', []);
     angular.module('timetableApp.dashboard', ['timetableApp.authentication']);
-    angular.module('timetableApp.timetables', ['timetableApp.authentication']);
+    angular.module('timetableApp.timetables', ['timetableApp.authentication', 'timetableApp.commonServices']);
     angular.module('timetableApp', ['ngRoute', 'timetableApp.authentication', 'timetableApp.dashboard',
         'timetableApp.timetables','pascalprecht.translate']);
 
