@@ -19,6 +19,8 @@
         vm.newEvent = {};
         vm.initNewEvent = initNewEvent;
         vm.submitNewEventCreation = submitNewEventCreation;
+        vm.moveBack = moveBack;
+        vm.moveForward = moveForward;
 
         activate();
 
@@ -48,6 +50,25 @@
                 });
             }
             return days;
+        }
+
+        function moveBack() {
+            vm.fromDate.setDate(vm.fromDate.getDate() - 7);
+            vm.toDate.setDate(vm.toDate.getDate() - 7);
+            vm.currentMonth = vm.fromDate.getMonth();
+            updateEvents();
+        }
+
+        function moveForward() {
+            vm.fromDate.setDate(vm.fromDate.getDate() + 7);
+            vm.toDate.setDate(vm.toDate.getDate() + 7);
+            vm.currentMonth = vm.fromDate.getMonth();
+            updateEvents();
+        }
+
+        function updateEvents() {
+            eventService.findEventsForPeriod(vm.timetable.id, vm.fromDate, vm.toDate)
+                .then(initDailyEvents);
         }
 
         function initNewEvent() {
@@ -82,7 +103,7 @@
                 endDate: moment(vm.newEvent.endDate, DATE_FORMAT).toDate(),
                 usePeriod: vm.newEvent.usePeriod,
                 periodDays: vm.newEvent.periodUnits === 'days' ? vm.newEvent.periodLength : 0,
-                periodWeeks: vm.newEvent.periodUnits === 'weeks' ? vm.newEvent.periodLength: 0
+                periodWeeks: vm.newEvent.periodUnits === 'weeks' ? vm.newEvent.periodLength : 0
             }
         }
     }

@@ -83,13 +83,19 @@
 <div class="col-md-10 col-md-offset-1 main-content">
     <div class="timetable-header">
         <div class="row">
-            <div class="timetable-header_title col-md-offset-1 col-md-4">
+            <div class="timetable-header_title col-md-offset-1 col-md-3">
                 {{vm.timetable.title}}
                 <button ng-if="vm.currentUser.id === vm.timetable.ownerId" type="button" ng-click="vm.initNewEvent()" class="btn add-button margin-left-md" data-toggle="modal" data-target=".create-event-modal">+</button>
             </div>
             <div class="timetable-header_current-week col-md-4">
+                <button ng-click="vm.moveBack()" type="button" class="btn btn-default btn-xs" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>
+                </button>
                 {{'MONTH.' + (vm.currentMonth + 1) | translate}}: {{'VIEW_TIMETABLE.WEEK' | translate}} {{vm.fromDate |
                 date:'dd'}} - {{vm.toDate | date:'dd'}}
+                <button ng-click="vm.moveForward()" type="button" class="btn btn-default btn-xs" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+                </button>
             </div>
         </div>
     </div>
