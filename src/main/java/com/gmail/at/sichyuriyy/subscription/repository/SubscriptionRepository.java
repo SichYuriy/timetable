@@ -12,7 +12,7 @@ public interface SubscriptionRepository extends JpaRepository<Subscription, Long
 
     @Query("select s from Subscription s " +
             "where s.timetable.deleted = false and s.subscriber = :subscriber " +
-            "order by s.active desc")
+            "order by s.timetable.active desc")
     Page<Subscription> findAllBySubscriber(@Param("subscriber") User subscriber,
                                            Pageable pageable);
 }

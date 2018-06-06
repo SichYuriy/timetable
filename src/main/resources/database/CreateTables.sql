@@ -61,13 +61,19 @@ CREATE TABLE `subscription` (
     REFERENCES `timetable` (`id`)
 );
 
-CREATE TABLE `update_message` (
-  `id`  BIGINT   NOT NULL AUTO_INCREMENT,
-  `timetable_id` BIGINT NOT NULL,
-  `user_id` BIGINT NOT NULl,
-  `read` TINYINT(1) NOT NULL DEFAULT 0,
+CREATE TABLE `message_text` (
+  `id`   BIGINT NOT NULL AUTO_INCREMENT,
   `text` NVARCHAR(1024),
-  `date` DATETIME NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `update_message` (
+  `id`           BIGINT     NOT NULL AUTO_INCREMENT,
+  `timetable_id` BIGINT     NOT NULL,
+  `user_id`      BIGINT     NOT NULl,
+  `read`         TINYINT(1) NOT NULL DEFAULT 0,
+  `text_id`      BIGINT,
+  `date`         DATETIME   NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_update_message_timetable_index` (`timetable_id` ASC),
   INDEX `fk_update_message_user_index` (`user_id` ASC),
@@ -76,5 +82,8 @@ CREATE TABLE `update_message` (
     REFERENCES `timetable` (`id`),
   CONSTRAINT `fk_update_message_timetable`
     FOREIGN KEY (`user_id`)
-    REFERENCES `user` (`id`)
+    REFERENCES `user` (`id`),
+  CONSTRAINT `fk_update_message_message_text`
+    FOREIGN KEY (`text_id`)
+    REFERENCES `message_text` (`id`)
 );
