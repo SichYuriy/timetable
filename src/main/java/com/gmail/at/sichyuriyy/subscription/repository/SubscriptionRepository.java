@@ -11,7 +11,8 @@ import org.springframework.data.repository.query.Param;
 public interface SubscriptionRepository extends JpaRepository<Subscription, Long> {
 
     @Query("select s from Subscription s " +
-            "where s.timetable.deleted = false and s.subscriber = :subscriber")
+            "where s.timetable.deleted = false and s.subscriber = :subscriber " +
+            "order by s.active desc")
     Page<Subscription> findAllBySubscriber(@Param("subscriber") User subscriber,
                                            Pageable pageable);
 }
