@@ -5,7 +5,7 @@ import com.gmail.at.sichyuriyy.security.service.SecurityService;
 import com.gmail.at.sichyuriyy.timetable.domain.Timetable;
 import com.gmail.at.sichyuriyy.timetable.repository.TimetableRepository;
 import com.gmail.at.sichyuriyy.user.domain.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
+@AllArgsConstructor
 public class TimetableServiceImpl implements TimetableService {
 
     private static final int TIMETABLE_PAGE_SIZE = 5;
@@ -22,15 +23,14 @@ public class TimetableServiceImpl implements TimetableService {
     private final TimetableRepository timetableRepository;
     private final SecurityService securityService;
 
-    @Autowired
-    public TimetableServiceImpl(TimetableRepository timetableRepository, SecurityService securityService) {
-        this.timetableRepository = timetableRepository;
-        this.securityService = securityService;
-    }
-
     @Override
     public Optional<Timetable> getById(Long id) {
         return timetableRepository.findById(id);
+    }
+
+    @Override
+    public Optional<Timetable> getPublicTimetableById(Long id) {
+        return getById(id).filter(t -> !t.getIsPrivate());
     }
 
     @Override
@@ -58,9 +58,8 @@ public class TimetableServiceImpl implements TimetableService {
             return publicTimetable;
         }
         return securityService.findLoggedInUser()
-                .map(u -> timetableRepository
-                        .findPublicOrOwnTimetableById(id, u.getId())
-                        .orElse(null));
+                .flatMap(u -> timetableRepository
+                        .findPublicOrOwnTimetableById(id, u.getId()));
     }
 
     @Override

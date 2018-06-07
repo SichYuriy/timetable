@@ -8,6 +8,7 @@
         this.getFewMyNotActiveTimetables = getFewMyNotActiveTimetables;
         this.getById = getById;
 
+
         function getFewMyNotActiveTimetables() {
             return timetableRepository
                 .getOwnAndNotActiveTimetables(0)

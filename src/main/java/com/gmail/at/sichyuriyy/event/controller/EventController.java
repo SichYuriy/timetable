@@ -34,8 +34,6 @@ public class EventController {
     public List<ActualEvent> getActualEventsForPeriod(@PathVariable Long timetableId,
                                                       @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
                                                       @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
-        List<ActualEvent> actualEventsBetween = eventService.findActualEventsBetween(timetableId, startDate, endDate);
-        System.out.println(actualEventsBetween.size());
-        return actualEventsBetween;
+        return eventService.findActualEventsBetween(timetableId, startDate, endDate);
     }
 }

@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public interface TimetableService {
     Optional<Timetable> getById(Long id);
+    Optional<Timetable> getPublicTimetableById(Long id);
     Timetable create(Timetable timetable);
     Page<Timetable> getOwnNotActiveTimetables(int pageNum);
     Optional<Timetable> getSecuredTimetableById(Long id);

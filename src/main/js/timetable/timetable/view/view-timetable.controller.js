@@ -21,6 +21,7 @@
         vm.submitNewEventCreation = submitNewEventCreation;
         vm.moveBack = moveBack;
         vm.moveForward = moveForward;
+        vm.isCurrentUserOwner = isCurrentUserOwner;
 
         activate();
 
@@ -105,6 +106,13 @@
                 periodDays: vm.newEvent.periodUnits === 'days' ? vm.newEvent.periodLength : 0,
                 periodWeeks: vm.newEvent.periodUnits === 'weeks' ? vm.newEvent.periodLength : 0
             }
+        }
+
+        function isCurrentUserOwner() {
+            if (!vm.currentUser) {
+                return false;
+            }
+            return vm.currentUser.id === vm.timetable.ownerId;
         }
     }
 })();

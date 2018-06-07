@@ -50,7 +50,8 @@ public class TimetableController {
 
     @GetMapping("/{id}")
     public TimetableDto getById(@PathVariable Long id) {
-        return timetableTransformer
-                .toDto(timetableService.getSecuredTimetableById(id).orElse(null));
+        return timetableService.getSecuredTimetableById(id)
+                .map(timetableTransformer::toDto)
+                .orElse(null);
     }
 }

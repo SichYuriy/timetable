@@ -1,12 +1,15 @@
 package com.gmail.at.sichyuriyy.subscription.repository;
 
 import com.gmail.at.sichyuriyy.subscription.domain.Subscription;
+import com.gmail.at.sichyuriyy.timetable.domain.Timetable;
 import com.gmail.at.sichyuriyy.user.domain.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
+import java.util.Optional;
 
 public interface SubscriptionRepository extends JpaRepository<Subscription, Long> {
 
@@ -15,4 +18,7 @@ public interface SubscriptionRepository extends JpaRepository<Subscription, Long
             "order by s.timetable.active desc")
     Page<Subscription> findAllBySubscriber(@Param("subscriber") User subscriber,
                                            Pageable pageable);
+
+    Optional<Subscription> findByTimetableAndSubscriber(Timetable timetable,
+                                                        User subscriber);
 }

@@ -6,6 +6,7 @@ import com.gmail.at.sichyuriyy.timetable.domain.Timetable;
 import com.gmail.at.sichyuriyy.timetable.repository.TimetableRepository;
 import com.gmail.at.sichyuriyy.user.domain.User;
 import com.gmail.at.sichyuriyy.user.repository.UserRepository;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.transaction.Transactional;
 import java.util.Arrays;
+import java.util.Optional;
 
 import static com.gmail.at.sichyuriyy.subscription.SubscriptionTestData.getTestSubscription;
 import static com.gmail.at.sichyuriyy.timetable.TimetableTestData.getTestTimetable;
@@ -35,24 +37,65 @@ public class SubscriptionRepositoryTest {
     @Autowired
     private TimetableRepository timetableRepository;
 
-    @Test
-    public void findAllBySubscriber_shouldMatchBySubscriberAndNotDeletedTimetable() {
+    private User user1;
+    private User user2;
+    private Timetable timetable1;
+    private Timetable timetable2;
+    private Timetable deletedTimetable;
+
+    @Before
+    public void setUp() {
         User timetableOwner = User.builder().username("owner").password("0").build();
-        User user1 = User.builder().username("user1").password("1").build();
-        User user2 = User.builder().username("user2").password("2").build();
-        Timetable timetable1 = getTestTimetable(timetableOwner);
-        Timetable timetable2 = getTestTimetable(timetableOwner);
-        timetable2.setDeleted(true);
-        Subscription subscription1 = getTestSubscription(user1, timetable1);
-        Subscription subscription2 = getTestSubscription(user2, timetable1);
-        Subscription subscription3 = getTestSubscription(user1, timetable2);
+        user1 = User.builder().username("user1").password("1").build();
+        user2 = User.builder().username("user2").password("2").build();
+        timetable1 = getTestTimetable(timetableOwner);
+        timetable2 = getTestTimetable(timetableOwner);
+        deletedTimetable = getTestTimetable(timetableOwner);
+        deletedTimetable.setDeleted(true);
 
         userRepository.saveAll(Arrays.asList(timetableOwner, user1, user2));
-        timetableRepository.saveAll(Arrays.asList(timetable1, timetable2));
+        timetableRepository.saveAll(Arrays.asList(timetable1, timetable2, deletedTimetable));
+    }
+
+    @Test
+    public void findAllBySubscriber_shouldMatchBySubscriberAndNotDeletedTimetable() {
+        Subscription subscription1 = getTestSubscription(user1, timetable1);
+        Subscription subscription2 = getTestSubscription(user2, timetable1);
+        Subscription subscription3 = getTestSubscription(user1, deletedTimetable);
         subject.saveAll(Arrays.asList(subscription1, subscription2, subscription3));
 
         Page<Subscription> actual = subject.findAllBySubscriber(user1, PageRequest.of(0, 5));
 
         assertThat(actual).containsExactly(subscription1);
+    }
+
+    @Test
+    public void findByTimetableAndSubscriber_shouldReturnMatched() {
+        Subscription subscription = getTestSubscription(user1, timetable1);
+        subject.save(subscription);
+
+        Optional<Subscription> actual = subject.findByTimetableAndSubscriber(timetable1, user1);
+
+        assertThat(actual).containsSame(subscription);
+    }
+
+    @Test
+    public void findByTimetableAndSubscriber_shouldFilterOutByTimetable() {
+        Subscription subscription = getTestSubscription(user1, timetable1);
+        subject.save(subscription);
+
+        Optional<Subscription> actual = subject.findByTimetableAndSubscriber(timetable2, user1);
+
+        assertThat(actual).isEmpty();
+    }
+
+    @Test
+    public void findByTimetableAndSubscriber_shouldFilterOutByUser() {
+        Subscription subscription = getTestSubscription(user1, timetable1);
+        subject.save(subscription);
+
+        Optional<Subscription> actual = subject.findByTimetableAndSubscriber(timetable1, user2);
+
+        assertThat(actual).isEmpty();
     }
 }
