@@ -58,7 +58,8 @@ CREATE TABLE `subscription` (
     REFERENCES `user` (`id`),
   CONSTRAINT `fk_subscription_timetable`
     FOREIGN KEY (`timetable_id`)
-    REFERENCES `timetable` (`id`)
+    REFERENCES `timetable` (`id`),
+  CONSTRAINT `unique_subscription` UNIQUE (`subscriber_id`, `timetable_id`)
 );
 
 CREATE TABLE `message_text` (
