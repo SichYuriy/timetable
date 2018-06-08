@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-    angular.module('timetableApp.timetables').service('timetableService',
+    angular.module('timetableApp.services').service('timetableService',
         ['timetableRepository', TimetableService]);
 
     function TimetableService(timetableRepository) {

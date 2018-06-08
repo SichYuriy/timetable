@@ -1,5 +1,5 @@
 describe('LoginFormController', function () {
-    beforeEach(module('timetableApp.authentication'));
+    beforeEach(module('timetableApp.components'));
 
     let $rootScope;
     let $controller;

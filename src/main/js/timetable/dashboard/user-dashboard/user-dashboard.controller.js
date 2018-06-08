@@ -1,5 +1,5 @@
 (function () {
-    angular.module('timetableApp.dashboard').controller('UserDashboardController',
+    angular.module('timetableApp.components').controller('UserDashboardController',
         ['$window', 'authenticationService', 'timetableService', UserDashboardController]);
 
     function UserDashboardController($window, authenticationService, timetableService) {
@@ -18,6 +18,5 @@
             timetableService.getFewMyNotActiveTimetables()
                 .then(timetables => vm.ownAndNotActiveTimetables = timetables);
         }
-
     }
 })();

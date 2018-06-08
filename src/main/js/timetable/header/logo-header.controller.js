@@ -1,5 +1,5 @@
 (function () {
-    angular.module('timetableApp.authentication').controller('LogoHeaderController',
+    angular.module('timetableApp.components').controller('LogoHeaderController',
         ['$scope', '$interval', '$window', '$translate', 'authenticationService', LogoHeaderController]);
 
     function LogoHeaderController($scope, $interval, $window, $translate, authenticationService) {

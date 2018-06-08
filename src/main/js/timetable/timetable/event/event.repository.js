@@ -1,5 +1,5 @@
 (function () {
-    angular.module('timetableApp.timetables').service('eventRepository',
+    angular.module('timetableApp.repositories').service('eventRepository',
         ['$http', EventRepository]);
 
     function EventRepository($http) {

@@ -1,11 +1,11 @@
 (function () {
     'use strict';
-    angular.module('timetableApp.commonServices', []);
-    angular.module('timetableApp.authentication', []);
-    angular.module('timetableApp.dashboard', ['timetableApp.authentication']);
-    angular.module('timetableApp.timetables', ['timetableApp.authentication', 'timetableApp.commonServices']);
-    angular.module('timetableApp', ['ngRoute', 'timetableApp.authentication', 'timetableApp.dashboard',
-        'timetableApp.timetables','pascalprecht.translate']);
+    angular.module('timetableApp.configs', []);
+    angular.module('timetableApp.repositories', ['timetableApp.configs']);
+    angular.module('timetableApp.services', ['timetableApp.configs', 'timetableApp.repositories']);
+    angular.module('timetableApp.components', ['timetableApp.configs', 'timetableApp.services']);
+    angular.module('timetableApp', ['ngRoute', 'timetableApp.configs', 'timetableApp.services',
+        'timetableApp.components', 'pascalprecht.translate']);
 
     angular.module('timetableApp').config(['$locationProvider', '$routeProvider',
         function config($locationProvider, $routeProvider) {

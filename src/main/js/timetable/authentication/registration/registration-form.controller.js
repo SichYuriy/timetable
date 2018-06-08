@@ -1,9 +1,9 @@
 (function () {
-    angular.module('timetableApp.authentication').controller('RegistrationFormController',
+    angular.module('timetableApp.components').controller('RegistrationFormController',
         ['authenticationService', RegistrationFormController]);
 
     function RegistrationFormController(authenticationService) {
-        var vm = this;
+        let vm = this;
 
         vm.username = '';
         vm.password = '';

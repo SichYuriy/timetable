@@ -9,7 +9,7 @@ module.exports = function (config) {
             'main/js/bower_components/angular-mocks/angular-mocks.js',
             'main/js/timetable/app.module.js',
             'main/js/timetable/**/*!(.module).js',
-            'test/js/**/*.spec.js'
+            'test/js/timetable/**/*.spec.js'
         ],
 
         autoWatch: false,

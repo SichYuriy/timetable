@@ -1,5 +1,5 @@
 (function () {
-    angular.module('timetableApp.timetables').controller('CreateTimetableFormController',
+    angular.module('timetableApp.components').controller('CreateTimetableFormController',
         ['$window', 'timetableService', 'authenticationService', CreateTimetableController]);
 
     function CreateTimetableController($window, timetableService, authenticationService) {

@@ -1,5 +1,5 @@
 (function () {
-    angular.module('timetableApp.timetables').directive('timetableEvent', TimetableEvent);
+    angular.module('timetableApp.components').directive('timetableEvent', TimetableEvent);
     
     function TimetableEvent() {
         return {

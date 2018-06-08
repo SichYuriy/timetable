@@ -1,5 +1,5 @@
 (function () {
-    angular.module('timetableApp.timetables').controller('ViewTimetableController',
+    angular.module('timetableApp.components').controller('ViewTimetableController',
         ['$scope', '$routeParams', 'timetableService', 'timeUtilService',
             'authenticationService', 'eventService', ViewTimetableController]);
 

@@ -1,5 +1,5 @@
 (function () {
-    angular.module('timetableApp.authentication').component('loginForm', {
+    angular.module('timetableApp.components').component('loginForm', {
         templateUrl: 'authentication/login/login-form.html',
         controller: 'LoginFormController',
         controllerAs: 'vm'

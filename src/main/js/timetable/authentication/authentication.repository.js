@@ -1,5 +1,5 @@
 (function () {
-    angular.module('timetableApp.authentication').service('authenticationRepository',
+    angular.module('timetableApp.repositories').service('authenticationRepository',
         ['$http', AuthenticationRepository]);
 
     function AuthenticationRepository($http) {

@@ -1,5 +1,5 @@
 (function () {
-    angular.module('timetableApp.timetables').service('eventService',
+    angular.module('timetableApp.services').service('eventService',
         ['eventRepository', 'timeUtilService', EventService]);
 
     function EventService(eventRepository, timeUtilService) {

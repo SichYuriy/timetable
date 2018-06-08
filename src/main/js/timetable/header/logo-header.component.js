@@ -1,5 +1,5 @@
 (function () {
-    angular.module('timetableApp.authentication').component('logoHeader', {
+    angular.module('timetableApp.components').component('logoHeader', {
         templateUrl: 'common/header/logo-header.html',
         controller: 'LogoHeaderController',
         controllerAs: 'vm',

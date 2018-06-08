@@ -1,5 +1,5 @@
 describe('authenticationService', function () {
-    beforeEach(module('timetableApp.authentication'));
+    beforeEach(module('timetableApp.services'));
 
     let authenticationRepositoryMock;
     let authenticationService;
