@@ -10,16 +10,6 @@
         vm.logout = logout;
         vm.changeLanguage = changeLanguage;
 
-        activate();
-        
-        function activate() {
-            $interval(updateCurrentTime, 1000);
-        }
-
-        function updateCurrentTime() {
-            vm.currentTime = Date.now();
-        }
-
         function logout() {
             authenticationService.logout().then(redirectDashboard);
         }
