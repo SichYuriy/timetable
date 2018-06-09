@@ -1,0 +1,101 @@
+<button type="button" ng-click="vm.initNewEvent()" class="btn add-button margin-left-md" data-toggle="modal" data-target=".create-event-modal">+</button>
+<div class="modal fade create-event-modal" id="create-event-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h2 class="modal-title form-title">{{'CREATE_EVENT_FORM.TITLE' | translate}}</h2>
+            </div>
+            <form ng-submit="vm.submitNewEventCreation()">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="event-title" class="control-label">{{'EVENT_FORM.TITLE' | translate}}</label>
+                        <input type="text" class="form-control" id="event-title" ng-model="vm.newEvent.title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="event-description" class="control-label">{{'EVENT_FORM.DESCRIPTION' | translate}}</label>
+                        <textarea rows="5" class="form-control" id="event-description"
+                                  ng-model="vm.newEvent.description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="event-location" class="control-label">{{'EVENT_FORM.LOCATION' | translate}}</label>
+                        <input type="text" class="form-control" id="event-location" ng-model="vm.newEvent.location">
+                    </div>
+                    <div class="row">
+                        <div class='col-md-5'>
+                            <div class="form-group">
+                                <label for="event-start-date" class="control-label">{{'EVENT_FORM.START_DATE' | translate}}</label>
+                                <div class='input-group date' id="event-start-date" >
+                                    <input type='text' class="form-control" ng-model="vm.newEvent.startDate" required/>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='col-md-5'>
+                            <div class="form-group">
+                                <label for="event-end-date" class="control-label">{{'EVENT_FORM.END_DATE' | translate}}</label>
+                                <div class='input-group date' id='event-end-date'>
+                                    <input type='text' class="form-control" ng-model="vm.newEvent.endDate" required/>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" id="event-use-period" ng-model="vm.newEvent.usePeriod">
+                        <label for="event-use-period">{{'EVENT_FORM.USE_PERIOD' | translate}}</label>
+                    </div>
+                    <div ng-if="vm.newEvent.usePeriod" class="form-group">
+                        <label>
+                            {{'EVENT_FORM.PERIOD_UNITS' | translate}}
+                            <input type="radio" ng-model="vm.newEvent.periodUnits" value="weeks">{{'EVENT_FORM.WEEKS' | translate}}
+                            <input type="radio" ng-model="vm.newEvent.periodUnits" value="days">{{'EVENT_FORM.DAYS' | translate}}
+                        </label>
+                    </div>
+                    <div ng-if="vm.newEvent.usePeriod" class="form-group">
+                        <label for="event-period">{{'EVENT_FORM.PERIOD_LENGTH' | translate}}</label>
+                        <div class="row">
+                            <div class="col-md-2 no-right-padding" style="width:75px">
+                                <input ng-model="vm.newEvent.periodLength" class="form-control"
+                                       type="number" id="event-period" min="1" step="1" data-bind="value:replyNumber" />
+                            </div>
+                            <div class="no-left-padding">
+                                <span class="form-control-text" ng-if="vm.newEvent.periodUnits === 'weeks'">{{'EVENT_FORM.WEEKS_LENGTH' | translate}}</span>
+                                <span class="form-control-text" ng-if="vm.newEvent.periodUnits === 'days'">{{'EVENT_FORM.DAYS_LENGTH' | translate}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{'FORM.CANCEL' | translate}}</button>
+                    <input type="submit" class="btn btn-primary" value="{{'CREATE_EVENT_FORM.SUBMIT' | translate}}">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        const DATE_FORMAT = 'DD/MM/YYYY, HH:mm:ss';
+        let startDatePicker = $('#event-start-date');
+        let endDatePicker = $('#event-end-date');
+        startDatePicker.datetimepicker({
+            format: DATE_FORMAT
+        });
+        endDatePicker.datetimepicker({
+            useCurrent: false,
+            format: DATE_FORMAT
+        });
+        startDatePicker.on("dp.change", function (e) {
+            $('#event-end-date').data("DateTimePicker").minDate(e.date);
+        });
+        endDatePicker.on("dp.change", function (e) {
+            $('#event-start-date').data("DateTimePicker").maxDate(e.date);
+        });
+    });
+</script>
