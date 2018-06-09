@@ -1,8 +1,8 @@
 (function () {
     angular.module('timetableApp.components').controller('LoginFormController',
-        ['authenticationService', '$window', LoginFormController]);
+        ['$window', 'authenticationService', LoginFormController]);
 
-    function LoginFormController(authenticationService, $window) {
+    function LoginFormController($window, authenticationService) {
         let vm = this;
 
         vm.username = '';

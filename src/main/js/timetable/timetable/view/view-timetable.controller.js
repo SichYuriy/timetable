@@ -1,9 +1,9 @@
 (function () {
     angular.module('timetableApp.components').controller('ViewTimetableController',
-        ['$scope', '$routeParams', 'timetableService', 'timeUtilService',
+        ['$routeParams', 'timetableService', 'timeUtilService',
             'authenticationService', 'eventService', ViewTimetableController]);
 
-    function ViewTimetableController($scope, $routeParams, timetableService,
+    function ViewTimetableController($routeParams, timetableService,
                                      timeUtilService, authenticationService, eventService) {
         let vm = this;
 
