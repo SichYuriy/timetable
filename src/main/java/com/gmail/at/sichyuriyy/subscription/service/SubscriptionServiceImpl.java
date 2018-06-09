@@ -22,7 +22,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     private final SubscriptionRepository subscriptionRepository;
 
     @Override
-    public void createPublicSubscription(Long timetableId) {
+    public Subscription createPublicSubscription(Long timetableId) {
         Timetable timetable = timetableService.getPublicTimetableById(timetableId)
                 .orElseThrow(NoSuchTimetableException::new);
         User user = securityService.findLoggedInUser()
@@ -34,7 +34,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
                 .subscriber(user)
                 .build();
 
-        subscriptionRepository.save(subscription);
+        return subscriptionRepository.save(subscription);
     }
 
     @Override

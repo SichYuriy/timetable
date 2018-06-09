@@ -22,7 +22,9 @@ public class Subscription {
     private User subscriber;
     @ManyToOne(fetch = FetchType.LAZY)
     private Timetable timetable;
+    @Builder.Default
     private Boolean muted = false;
     private Boolean approved;
+    @Builder.Default
     private Boolean banned = false;
 }

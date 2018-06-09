@@ -5,6 +5,10 @@
             <div class="timetable-header_title col-md-offset-1 col-md-3">
                 {{vm.timetable.title}}
                 <create-event-modal ng-if="vm.isCurrentUserOwner()" timetable="vm.timetable"></create-event-modal>
+                <button ng-if=" vm.currentUser.username && !vm.isCurrentUserOwner() && !vm.isSubscribed()"
+                        type="button"
+                        ng-click="vm.createSubscription()"
+                        class="btn subscribe-button timetable-action-button margin-left-md">{{'SUBSCRIBE' | translate}}</button>
             </div>
             <div class="timetable-header_current-week col-md-4">
                 <button ng-click="vm.moveBack()" type="button" class="btn btn-default btn-xs" aria-label="Left Align">

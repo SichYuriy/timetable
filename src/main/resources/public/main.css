@@ -14,19 +14,31 @@ body {
     text-decoration: underline;
 }
 
-.add-button {
-    background-color: #C1FA88;
-    padding: 0;
-    color: gray;
+.add-event-button {
     width: 25px;
+    color: gray;
+    padding: 0;
+    background-color: #C1FA88;
     height: 25px;
     font-size: 15px;
     font-weight: bold;
+
+}
+
+.subscribe-button {
+    padding: 0 5px;
+    font-size: 10pt;
+    background-color: white;
+    border: 2px solid green;
+    color: green;
+}
+
+.timetable-action-button {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.add-button:hover {
-    border: 1px solid black;
+.timetable-action-button:hover {
+    box-shadow: 1px 5px 9px 1px rgba(0, 0, 0, 0.2), 1px 7px 21px 1px rgba(0, 0, 0, 0.19);
 }
 
 .margin-left-md {

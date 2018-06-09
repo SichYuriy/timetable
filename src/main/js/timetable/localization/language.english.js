@@ -4,6 +4,7 @@
 
     function getTranslations() {
         return {
+            SUBSCRIBE: 'Subscribe',
             LOGIN: 'Sign in',
             REGISTRATION: 'Sign up',
             LOGIN_FORM: {

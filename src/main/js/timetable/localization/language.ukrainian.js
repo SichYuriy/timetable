@@ -4,6 +4,7 @@
 
     function getTranslations() {
         return {
+            SUBSCRIBE: 'Підписатися',
             LOGIN: 'Увійти',
             REGISTRATION: 'Реєстрація',
             LOGIN_FORM: {

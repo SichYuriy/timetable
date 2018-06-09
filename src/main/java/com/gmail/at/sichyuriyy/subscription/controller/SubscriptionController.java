@@ -1,5 +1,6 @@
 package com.gmail.at.sichyuriyy.subscription.controller;
 
+import com.gmail.at.sichyuriyy.subscription.domain.Subscription;
 import com.gmail.at.sichyuriyy.subscription.dto.SubscriptionDto;
 import com.gmail.at.sichyuriyy.subscription.dto.SubscriptionTransformer;
 import com.gmail.at.sichyuriyy.subscription.service.SubscriptionService;
@@ -18,8 +19,9 @@ public class SubscriptionController {
     private final SubscriptionService subscriptionService;
 
     @PostMapping("/timetables/public/{timetableId}/subscription}")
-    public void createSubscriptionOnPublicTimetable(@PathVariable Long timetableId) {
-        subscriptionService.createPublicSubscription(timetableId);
+    public SubscriptionDto createSubscriptionOnPublicTimetable(@PathVariable Long timetableId) {
+        Subscription subscription = subscriptionService.createPublicSubscription(timetableId);
+        return subscriptionTransformer.toDto(subscription);
     }
 
     @GetMapping("/timetables/{timetableId}/subscription/own")
