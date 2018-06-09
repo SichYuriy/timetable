@@ -33,6 +33,9 @@
         }
 
         function loadSubscription(timetableId) {
+            if (isCurrentUserOwner()) {
+                return;
+            }
             return subscriptionService.getOwnSubscription(timetableId)
                 .then(s => vm.subscription = s);
         }
