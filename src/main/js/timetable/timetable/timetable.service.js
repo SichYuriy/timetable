@@ -1,24 +1,17 @@
 (function () {
     'use strict';
     angular.module('timetableApp.services').service('timetableService',
-        ['timetableRepository', TimetableService]);
+        ['timetableRepository', 'responseUtil', TimetableService]);
 
-    function TimetableService(timetableRepository) {
+    function TimetableService(timetableRepository, responseUtil) {
         this.create = timetableRepository.create;
         this.getFewMyNotActiveTimetables = getFewMyNotActiveTimetables;
-        this.getById = getById;
-
+        this.getById = responseUtil.extractData(timetableRepository.getById);
 
         function getFewMyNotActiveTimetables() {
             return timetableRepository
                 .getOwnAndNotActiveTimetables(0)
-                .then(page => page.data.content);
-        }
-
-        function getById(id) {
-            return timetableRepository
-                .getById(id)
-                .then(response => response.data);
+                .then(response => response.data.content);
         }
     }
 })();

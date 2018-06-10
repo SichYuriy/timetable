@@ -1,16 +1,11 @@
 (function () {
     angular.module('timetableApp.services').service('authenticationService',
-        ['authenticationRepository', AuthenticationService]);
+        ['authenticationRepository', 'responseUtil', AuthenticationService]);
 
-    function AuthenticationService(authenticationRepository) {
+    function AuthenticationService(authenticationRepository, responseUtil) {
         this.login = authenticationRepository.login;
         this.logout = authenticationRepository.logout;
         this.register = authenticationRepository.register;
-        this.getCurrentUser = getCurrentUser;
-
-        function getCurrentUser() {
-            return authenticationRepository.getCurrentUser()
-                .then(r => r.data);
-        }
+        this.getCurrentUser = responseUtil.extractData(authenticationRepository.getCurrentUser);
     }
 })();

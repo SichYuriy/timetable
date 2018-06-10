@@ -1,20 +1,10 @@
 (function () {
     angular.module('timetableApp.services').service('subscriptionService',
-        ['subscriptionRepository', SubscriptionService]);
+        ['subscriptionRepository', 'responseUtil', SubscriptionService]);
 
-    function SubscriptionService(subscriptionRepository) {
-        this.getOwnSubscription = getOwnSubscription;
-        this.createSubscriptionOnPublicTimetable = createSubscriptionOnPublicTimetable;
-
-        function getOwnSubscription(timetableId) {
-            return subscriptionRepository.getOwnSubscription(timetableId)
-                .then(r => r.data);
-        }
-
-        function createSubscriptionOnPublicTimetable(timetableId) {
-            return subscriptionRepository
-                .createSubscriptionOnPublicTimetable(timetableId)
-                .then(r => r.data);
-        }
+    function SubscriptionService(subscriptionRepository, responseUtil) {
+        this.getOwnSubscription = responseUtil.extractData(subscriptionRepository.getOwnSubscription);
+        this.createSubscriptionOnPublicTimetable =
+            responseUtil.extractData(subscriptionRepository.createSubscriptionOnPublicTimetable);
     }
 })();

@@ -1,18 +1,18 @@
 (function () {
     angular.module('timetableApp.components').controller('ViewTimetableController',
-        ['$routeParams', 'timetableService', 'subscriptionService', 'timeUtilService',
+        ['$routeParams', 'timetableService', 'subscriptionService', 'timeUtil',
             'authenticationService', 'eventService', ViewTimetableController]);
 
     function ViewTimetableController($routeParams, timetableService, subscriptionService,
-                                     timeUtilService, authenticationService, eventService) {
+                                     timeUtil, authenticationService, eventService) {
         let vm = this;
 
         vm.timetable = {};
         vm.subscription = {};
         vm.currentUser = {};
         vm.dayTimetableList = [];
-        vm.fromDate = timeUtilService.getFirstDayOfCurrentWeekFromMonday();
-        vm.toDate = timeUtilService.getLastDayOfCurrentWeekFromMonday();
+        vm.fromDate = timeUtil.getFirstDayOfCurrentWeekFromMonday();
+        vm.toDate = timeUtil.getLastDayOfCurrentWeekFromMonday();
         vm.currentMonth = new Date().getMonth();
         vm.moveBack = moveBack;
         vm.moveForward = moveForward;
@@ -53,7 +53,7 @@
         function initDailyEvents(events) {
             vm.dayTimetableList = initDayTimetableList(vm.fromDate);
             for (event of events) {
-                let index = timeUtilService.getDaysBetween(event.startDate, vm.fromDate);
+                let index = timeUtil.getDaysBetween(event.startDate, vm.fromDate);
                 vm.dayTimetableList[index].events.push(event);
             }
         }

@@ -1,8 +1,7 @@
 (function () {
-    angular.module('timetableApp.services').service('timeUtilService',
-        TimeUtilService);
+    angular.module('timetableApp.services').service('timeUtil', TimeUtil);
 
-    function TimeUtilService() {
+    function TimeUtil() {
 
         const MILLISECONDS_IN_DAY = 1000 * 60 * 60 * 24;
 
