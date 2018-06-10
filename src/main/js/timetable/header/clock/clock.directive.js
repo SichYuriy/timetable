@@ -1,8 +1,8 @@
 (function () {
     angular.module('timetableApp.components')
-        .directive('clock', ['$interval', 'dateFilter', Clock]);
+        .directive('clock', ['dateFilter', Clock]);
 
-    function Clock($interval, dateFilter) {
+    function Clock(dateFilter) {
         const TIME_FORMAT = 'hh:mm:ss';
 
         function link(scope, element) {
