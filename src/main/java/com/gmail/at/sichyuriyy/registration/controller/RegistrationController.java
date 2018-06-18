@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/users/registration")
+@RequestMapping
 public class RegistrationController {
 
     private final RegistrationService registrationService;
@@ -30,7 +30,7 @@ public class RegistrationController {
         webDataBinder.setValidator(new UserValidator());
     }
 
-    @PostMapping
+    @PostMapping("/users")
     public void registration(@Valid @RequestBody UserDto userDto) {
         registrationService.register(userTransformer.fromDto(userDto));
     }

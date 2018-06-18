@@ -21,7 +21,7 @@
         }
 
         function register(user) {
-            return $http.post('/users/registration', user);
+            return $http.post('/users', user);
         }
     }
 })();

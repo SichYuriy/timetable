@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/timetables")
 public class TimetableController {
 
     private final TimetableService timetableService;
@@ -36,19 +35,19 @@ public class TimetableController {
         webDataBinder.setValidator(new CreateTimetableValidator());
     }
 
-    @PostMapping
+    @PostMapping("/timetables")
     public TimetableDto createTimetable(@Valid @RequestBody CreateTimetableDto timetableDto) {
         Timetable timetable = createTimetableTransformer.fromDto(timetableDto);
         return timetableTransformer.toDto(timetableService.create(timetable));
     }
 
-    @GetMapping(value = "/ownAndNotActive")
+    @GetMapping("/timetables/ownAndNotActive")
     public Page<TimetableDto> getOwnNotActiveTimetables(@RequestParam int pageNum) {
         Page<Timetable> timetables = timetableService.getOwnNotActiveTimetables(pageNum);
         return timetables.map(timetableTransformer::toDto);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/timetables/{id}")
     public TimetableDto getById(@PathVariable Long id) {
         return timetableService.getSecuredTimetableById(id)
                 .map(timetableTransformer::toDto)
