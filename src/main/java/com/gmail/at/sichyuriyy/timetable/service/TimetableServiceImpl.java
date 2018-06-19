@@ -52,6 +52,13 @@ public class TimetableServiceImpl implements TimetableService {
     }
 
     @Override
+    public Page<Timetable> getOwnActiveTimetables(int pageNum) {
+        User owner = securityService.findLoggedInUser().orElseThrow(ThereIsNoUserLoggedIn::new);
+        PageRequest pageRequest = PageRequest.of(pageNum, TIMETABLE_PAGE_SIZE);
+        return timetableRepository.findAllByActiveTrueAndOwnerAndDeletedFalseOrderByIdDesc(owner, pageRequest);
+    }
+
+    @Override
     public Optional<Timetable> getSecuredTimetableById(Long id) {
         Optional<Timetable> publicTimetable = timetableRepository.findByIdAndIsPrivateFalseAndDeletedFalse(id);
         if (publicTimetable.isPresent()) {

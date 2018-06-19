@@ -11,6 +11,7 @@ public interface TimetableService {
     Optional<Timetable> getPublicTimetableById(Long id);
     Timetable create(Timetable timetable);
     Page<Timetable> getOwnNotActiveTimetables(int pageNum);
+    Page<Timetable> getOwnActiveTimetables(int pageNum);
     Optional<Timetable> getSecuredTimetableById(Long id);
     Boolean hasViewAccess(User user, Timetable timetable);
 }
