@@ -52,6 +52,11 @@ public class TimetableController {
         return timetableService.getOwnActiveTimetables(pageNum).map(timetableTransformer::toDto);
     }
 
+    @GetMapping
+    public Page<TimetableDto> getSubscribedAndActiveTimetables(@RequestParam int pageNum) {
+        return null;
+    }
+
     @GetMapping("/timetables/{id}")
     public TimetableDto getById(@PathVariable Long id) {
         return timetableService.getSecuredTimetableById(id)

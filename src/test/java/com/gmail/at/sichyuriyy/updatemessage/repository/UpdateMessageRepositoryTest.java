@@ -43,7 +43,7 @@ public class UpdateMessageRepositoryTest {
         User timetableOwner = User.builder().username("owner").password("0").build();
         User user1 = User.builder().username("user1").password("1").build();
         User user2 = User.builder().username("user2").password("2").build();
-        Timetable timetable = TimetableTestData.getTestTimetable(timetableOwner);
+        Timetable timetable = TimetableTestData.getTimetable(timetableOwner);
         MessageText messageText = MessageText.builder().text("some text").build();
         UpdateMessage.UpdateMessageBuilder messageBuilder = UpdateMessage.builder()
                 .text(messageText)

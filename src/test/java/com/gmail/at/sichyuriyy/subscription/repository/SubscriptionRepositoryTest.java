@@ -20,8 +20,8 @@ import javax.transaction.Transactional;
 import java.util.Arrays;
 import java.util.Optional;
 
-import static com.gmail.at.sichyuriyy.subscription.SubscriptionTestData.getTestSubscription;
-import static com.gmail.at.sichyuriyy.timetable.TimetableTestData.getTestTimetable;
+import static com.gmail.at.sichyuriyy.subscription.SubscriptionTestData.getNotApprovedSubscription;
+import static com.gmail.at.sichyuriyy.timetable.TimetableTestData.getTimetable;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -48,9 +48,9 @@ public class SubscriptionRepositoryTest {
         User timetableOwner = User.builder().username("owner").password("0").build();
         user1 = User.builder().username("user1").password("1").build();
         user2 = User.builder().username("user2").password("2").build();
-        timetable1 = getTestTimetable(timetableOwner);
-        timetable2 = getTestTimetable(timetableOwner);
-        deletedTimetable = getTestTimetable(timetableOwner);
+        timetable1 = getTimetable(timetableOwner);
+        timetable2 = getTimetable(timetableOwner);
+        deletedTimetable = getTimetable(timetableOwner);
         deletedTimetable.setDeleted(true);
 
         userRepository.saveAll(Arrays.asList(timetableOwner, user1, user2));
@@ -59,9 +59,9 @@ public class SubscriptionRepositoryTest {
 
     @Test
     public void findAllBySubscriber_shouldMatchBySubscriberAndNotDeletedTimetable() {
-        Subscription subscription1 = getTestSubscription(user1, timetable1);
-        Subscription subscription2 = getTestSubscription(user2, timetable1);
-        Subscription subscription3 = getTestSubscription(user1, deletedTimetable);
+        Subscription subscription1 = getNotApprovedSubscription(user1, timetable1);
+        Subscription subscription2 = getNotApprovedSubscription(user2, timetable1);
+        Subscription subscription3 = getNotApprovedSubscription(user1, deletedTimetable);
         subject.saveAll(Arrays.asList(subscription1, subscription2, subscription3));
 
         Page<Subscription> actual = subject.findAllBySubscriber(user1, PageRequest.of(0, 5));
@@ -71,7 +71,7 @@ public class SubscriptionRepositoryTest {
 
     @Test
     public void findByTimetableAndSubscriber_shouldReturnMatched() {
-        Subscription subscription = getTestSubscription(user1, timetable1);
+        Subscription subscription = getNotApprovedSubscription(user1, timetable1);
         subject.save(subscription);
 
         Optional<Subscription> actual = subject.findByTimetableAndSubscriber(timetable1, user1);
@@ -81,7 +81,7 @@ public class SubscriptionRepositoryTest {
 
     @Test
     public void findByTimetableAndSubscriber_shouldFilterOutByTimetable() {
-        Subscription subscription = getTestSubscription(user1, timetable1);
+        Subscription subscription = getNotApprovedSubscription(user1, timetable1);
         subject.save(subscription);
 
         Optional<Subscription> actual = subject.findByTimetableAndSubscriber(timetable2, user1);
@@ -91,7 +91,7 @@ public class SubscriptionRepositoryTest {
 
     @Test
     public void findByTimetableAndSubscriber_shouldFilterOutByUser() {
-        Subscription subscription = getTestSubscription(user1, timetable1);
+        Subscription subscription = getNotApprovedSubscription(user1, timetable1);
         subject.save(subscription);
 
         Optional<Subscription> actual = subject.findByTimetableAndSubscriber(timetable1, user2);

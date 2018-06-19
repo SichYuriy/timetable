@@ -21,4 +21,12 @@ public interface SubscriptionRepository extends JpaRepository<Subscription, Long
 
     Optional<Subscription> findByTimetableAndSubscriber(Timetable timetable,
                                                         User subscriber);
+
+//    @Query("select t from Subscription s join s.timetable t " +
+//            "where s.subscriber = :subscriber " +
+//            "and s.timetable.id = t.id " +
+//            "and t.active = true and t.deleted = false " +
+//            "and s.banned = false and s.approved = true " +
+//            "order by id desc")
+//    List<Timetable> findOwnActiveSubscribedTimetables(@Param("subscriber") User owner);
 }

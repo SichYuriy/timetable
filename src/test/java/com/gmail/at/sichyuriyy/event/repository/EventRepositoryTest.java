@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.Optional;
 
-import static com.gmail.at.sichyuriyy.timetable.TimetableTestData.getTestTimetable;
+import static com.gmail.at.sichyuriyy.timetable.TimetableTestData.getTimetable;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -40,7 +40,7 @@ public class EventRepositoryTest {
     public void create_shouldSaveAllFields() {
         User user = User.builder().username("user1").password("1").build();
         userRepository.save(user);
-        Timetable timetable = getTestTimetable(user);
+        Timetable timetable = getTimetable(user);
         timetableRepository.save(timetable);
 
         Event event = Event.builder()
